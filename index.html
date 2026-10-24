@@ -1,10 +1,214 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="refresh" content="0; url=https://github.com/rexiox">
-    
-    <title>Rexiox</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#050505;color:#f4f4f5;font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased;--a1:#3a0a04;--a2:#c2240d;--a3:#ff5a3c;--a4:#2a0602}
+*{box-sizing:border-box}
+a{color:#f4f4f5}a:hover{color:#fff}
+@keyframes rxDrift{0%{background-position:0 0%}50%{background-position:0 18%}100%{background-position:0 0%}}
+@keyframes rxRise{from{transform:scaleY(0.6);opacity:0}to{transform:scaleY(1);opacity:1}}
+@keyframes rxLogoIn{0%{opacity:0;transform:rotate(-120deg) scale(.3);filter:blur(6px)}70%{opacity:1;transform:rotate(8deg) scale(1.06);filter:blur(0)}100%{opacity:1;transform:none}}
+@keyframes rxLetterIn{from{opacity:0;transform:translateY(70%);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes rxShine{from{background-position:120% 0}to{background-position:-120% 0}}
+@keyframes rxGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(255,255,255,0))}50%{filter:drop-shadow(0 0 8px var(--a3))}}
+@keyframes rxMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
+</helmet>
+<div style="background:#050505;color:#f4f4f5;min-height:100vh;overflow-x:hidden">
+
+<section id="top" data-screen-label="Hero" style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow:visible">
+  <div style="position:absolute;left:0;right:0;top:0;height:145vh;overflow:hidden;pointer-events:none">{{ bars }}</div>
+  <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,#050505 0%,rgba(5,5,5,0.85) 35%,rgba(5,5,5,0) 60%)"></div>
+  <div style="position:absolute;left:0;right:0;top:83vh;height:62vh;pointer-events:none;background:linear-gradient(to bottom,rgba(5,5,5,0) 0%,rgba(5,5,5,0.2) 25%,rgba(5,5,5,0.55) 50%,rgba(5,5,5,0.85) 72%,rgba(5,5,5,0.97) 88%,#050505 100%)"></div>
+
+  <header style="position:fixed;z-index:20;top:20px;left:50%;transform:translateX(-50%);width:min(760px,calc(100% - 32px));display:flex;align-items:center;gap:16px;padding:10px 10px 10px 14px;border-radius:999px;background:rgba(24,24,27,0.72);border:1px solid rgba(255,255,255,0.07);backdrop-filter:blur(16px)">
+    <a href="#top" aria-label="Rexiox" style="display:flex;align-items:center;text-decoration:none;margin-right:auto;padding:2px 6px 2px 0">{{ brand }}</a>
+    <nav style="display:flex;align-items:center;gap:2px;font-size:15px">
+      <a href="#about" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#a1a1aa" style-hover="color:#fff;background:rgba(255,255,255,0.06)">About</a>
+      <a href="#apps" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#a1a1aa" style-hover="color:#fff;background:rgba(255,255,255,0.06)">Apps</a>
+      <a href="#contact" style="margin-left:6px;padding:9px 18px;border-radius:999px;text-decoration:none;background:#fff;color:#0a0a0a;font-weight:500" style-hover="background:#e7e7e9;color:#0a0a0a">Contact</a>
+    </nav>
+  </header>
+
+  <div style="position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center;padding:120px 20px 30vh">
+    <span style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8">Independent app studio</span>
+    <h1 style="margin:0;font-weight:600;font-size:clamp(42px,6.6vw,92px);line-height:1;letter-spacing:-0.05em;max-width:15ch;text-wrap:balance">We turn bold ideas into apps people use every day, everywhere.</h1>
+    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:8px">
+      <a href="#apps" style="padding:15px 30px;border-radius:999px;background:#fff;color:#0a0a0a;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:-0.01em;box-shadow:0 0 32px rgba(255,255,255,0.28)" style-hover="background:#e7e7e9;color:#0a0a0a">Explore our apps</a>
+      <a href="#contact" style="padding:15px 30px;border-radius:999px;border:1px solid rgba(255,255,255,0.22);color:#f4f4f5;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:-0.01em;background:rgba(5,5,5,0.4)" style-hover="background:rgba(255,255,255,0.06);color:#fff">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+
+
+<section id="about" data-screen-label="About" ref="{{ aboutRef }}" style="position:relative;z-index:1;padding:clamp(96px,12vw,168px) clamp(16px,4vw,48px);max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center">
+  <span style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8">About Rexiox</span>
+  <p style="margin:0;font-size:clamp(28px,3.6vw,48px);line-height:1.12;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">
+    <sc-for list="{{ words }}" as="w" hint-placeholder-count="0"><span style="opacity:{{ w.o }};transition:opacity 0.25s linear">{{ w.t }} </span></sc-for>
+  </p>
+</section>
+
+<section id="apps" data-screen-label="Apps" style="padding:0 clamp(12px,2vw,24px) clamp(96px,12vw,160px)">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;padding:0 20px">
+    <span style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8">Our apps</span>
+    <h2 style="margin:0;font-weight:600;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-0.05em;max-width:12ch;text-wrap:balance;background:linear-gradient(to bottom,#ffffff 35%,#8b8b90);-webkit-background-clip:text;background-clip:text;color:transparent">Apps people open every day</h2>
+    <p style="margin:0;max-width:40ch;font-size:17px;line-height:1.5;color:#a1a1aa">Every app is designed, built and run by our own team.</p>
+  </div>
+  <div ref="{{ iconRowRef }}" style="margin:clamp(48px,6vw,80px) calc(-1 * clamp(12px,2vw,24px)) clamp(64px,8vw,112px);overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent);mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent)">{{ appMarquee }}</div>
+  </section>
+
+
+
+<footer id="contact" data-screen-label="Footer" style="padding:0 clamp(16px,4vw,48px) 32px">
+  <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:40px;padding-top:48px;border-top:1px solid rgba(255,255,255,0.07)">
+      <div style="display:flex;flex-direction:column;gap:14px;grid-column:span 2">
+        <div style="display:flex;align-items:center;gap:10px">
+          <img src="assets/logo-white.png" alt="" style="width:32px;height:32px;border-radius:50%">
+          <span style="font-size:18px;font-weight:500">Rexiox</span>
+        </div>
+        <p style="margin:0;max-width:34ch;font-size:15px;line-height:1.55;color:#a1a1aa">We turn bold ideas into apps people use every day, everywhere.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:15px">
+        <span style="font-size:13px;color:#71717a">Pages</span>
+        <a href="#about" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">About</a>
+        <a href="#apps" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">Apps</a>
+        <a href="#contact" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">Contact</a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;font-size:15px">
+        <span style="font-size:13px;color:#71717a">Social</span>
+        <a href="#" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">X</a>
+        <a href="#" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">Instagram</a>
+        <a href="#" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">LinkedIn</a>
+      </div>
+    </div>
+    <div style="font-size:clamp(80px,19vw,280px);font-weight:600;letter-spacing:-0.07em;line-height:0.8;background:linear-gradient(to bottom,#2a2a2e,#050505);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none">rexiox</div>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:#71717a">
+      <span>© 2026 Rexiox. All rights reserved.</span>
+      <span>Privacy · Terms</span>
+    </div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;red&quot;,&quot;violet&quot;,&quot;blue&quot;,&quot;white&quot;,&quot;gray&quot;,&quot;orange&quot;,&quot;green&quot;,&quot;pink&quot;,&quot;gold&quot;,&quot;cyan&quot;],&quot;default&quot;:&quot;red&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;aboutText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Rexiox is an independent studio that designs, builds and grows its own apps. We work in small teams, ship often, and care about every detail people touch.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;barCount&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:9,&quot;max&quot;:31,&quot;step&quot;:2,&quot;default&quot;:17,&quot;tsType&quot;:&quot;number&quot;},&quot;animate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { p: 0, hov: -1, paused: false, bh: false, bk: 0 };
+  iconRowRef = React.createRef();
+  aboutRef = React.createRef();
+  palettes = {
+    red:    ["#3a0a04", "#c2240d", "#ff5a3c", "#2a0602"],
+    violet: ["#1c0a4a", "#5b1df0", "#8f6bff", "#0b1a6e"],
+    blue:   ["#06183f", "#1550ff", "#5aa0ff", "#04103a"],
+    white:  ["#1c1c1f", "#8a8a90", "#e4e4e8", "#121214"],
+    gray:   ["#141416", "#4a4a50", "#9a9aa2", "#0c0c0e"],
+    orange: ["#3a1602", "#e0620c", "#ffa45a", "#2a0e02"],
+    green:  ["#03261a", "#0fa86a", "#5ce6a6", "#021a12"],
+    pink:   ["#3a0624", "#e0287e", "#ff7ab8", "#26041a"],
+    gold:   ["#2e2004", "#c48a12", "#f2cc6a", "#1e1502"],
+    cyan:   ["#022a33", "#0ea5c4", "#67e3f5", "#021c24"],
+  };
+  applyPalette() {
+    const p = this.palettes[this.props.palette ?? "red"] || this.palettes.red;
+    ["--a1", "--a2", "--a3", "--a4"].forEach((k, i) => document.body.style.setProperty(k, p[i]));
+  }
+  onScroll = () => {
+    const el = this.aboutRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect(), vh = window.innerHeight;
+    const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height * 0.9)));
+    if (Math.abs(p - this.state.p) > 0.005) this.setState({ p });
+  };
+  componentDidMount() {
+    const els = document.querySelectorAll('[data-reveal]');
+    els.forEach((el, i) => { el.style.opacity = 0; el.style.transform = 'translateY(56px) scale(0.98)'; el.style.transition = 'opacity 0.9s ease ' + (i % 2) * 0.12 + 's, transform 1s cubic-bezier(.2,.7,.2,1) ' + (i % 2) * 0.12 + 's'; });
+    this.io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'none'; this.io.unobserve(e.target); } }), { threshold: 0.15 });
+    els.forEach(el => this.io.observe(el));
+    this.applyPalette(); window.addEventListener("scroll", this.onScroll, { passive: true }); this.onScroll(); }
+  componentDidUpdate() { this.applyPalette(); }
+  componentWillUnmount() { this.io && this.io.disconnect(); window.removeEventListener("scroll", this.onScroll); }
+  renderVals() {
+    const n = this.props.barCount ?? 19;
+    const animate = this.props.animate ?? true;
+    const mid = (n - 1) / 2;
+    const bars = [];
+    for (let i = 0; i < n; i++) {
+      const d = Math.abs(i - mid) / mid;
+      bars.push(React.createElement("div", { key: i, style: {
+        flex: 1, height: `calc(${(22 + Math.pow(d, 1.3) * 46).toFixed(2)}vh + 45vh)`, transformOrigin: "bottom",
+        background: (() => { const X = 22 + Math.pow(d, 1.3) * 46, v = f => (X * f).toFixed(2) + "vh"; return `linear-gradient(to bottom, rgba(0,0,0,0) 0, var(--a1) ${v(.14)}, var(--a2) ${v(.32)}, var(--a3) ${v(.40)}, #ffffff ${v(.46)}, var(--a3) ${v(.52)}, var(--a2) ${v(.62)}, var(--a4) ${v(1)}, var(--a4) 100%)`; })(),
+        backgroundSize: "100% 130%",
+        animation: animate ? `rxRise 1.2s cubic-bezier(.2,.7,.2,1) ${(Math.abs(i - mid) * 0.05).toFixed(2)}s both, rxDrift ${6 + (i % 4)}s ease-in-out ${(i * 0.3).toFixed(1)}s infinite` : "none",
+      }}));
+    }
+    const tags = this.props.marqueeItems ?? ["iOS", "Android", "Web", "Product design", "UX research", "Swift", "Kotlin", "React Native", "App Store launch", "Growth"];
+    const row = (k) => tags.map((t, i) => React.createElement("span", { key: k + i, style: { display: "flex", alignItems: "center", gap: 48, fontSize: 22, color: "#a1a1aa", whiteSpace: "nowrap" } },
+      t, React.createElement("span", { style: { width: 6, height: 6, borderRadius: "50%", background: "var(--a3)" } })));
+    const marquee = React.createElement("div", { style: { display: "flex", gap: 48, width: "max-content", paddingLeft: 48, animation: animate ? "rxMarquee 40s linear infinite" : "none" } }, row("a"), row("b"));
+    
+    // ── Apps: add a new app by adding one line here (icon = square image path) ──
+    const APPS = this.props.apps ?? [
+      { name: "Macropad", icon: "assets/apps/macropad.png?v=2", url: "#" },
+    ];
+    const hues = [25, 300, 150, 230, 45, 190, 340, 90];
+    const items = [...APPS];
+    for (let i = 0; items.length < Math.max(8, APPS.length); i++) items.push({ hue: hues[i % hues.length] });
+    const tile = (it, i, k) => {
+      const on = this.state.hov === k, c = it.icon ? "rgba(255,255,255,0.35)" : `oklch(0.72 0.19 ${it.hue})`;
+      const inner = it.icon
+        ? React.createElement("img", { src: it.icon, alt: it.name, style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", borderRadius: 29, display: "block" } })
+        : React.createElement("div", { style: { width: 54, height: 54, borderRadius: 15, background: c, boxShadow: "0 0 " + (on ? 44 : 26) + "px " + c, opacity: on ? 1 : 0.88, transition: "box-shadow .45s, opacity .45s" } });
+      return React.createElement(it.url ? "a" : "div", { key: k, href: it.url, title: it.name,
+        onMouseEnter: () => this.setState({ hov: k }), onMouseLeave: () => this.setState({ hov: -1 }),
+        style: { position: "relative", flex: "none", width: 124, height: 124, borderRadius: 30, display: "grid", placeItems: "center", cursor: it.url ? "pointer" : "default", textDecoration: "none",
+          background: "linear-gradient(to bottom,#0f0f11,#070708)", border: "1px solid " + (on ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.09)"),
+          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)" + (on ? ", 0 18px 50px -10px " + c : ""),
+          transform: on ? "translateY(-8px)" : "none", transition: "transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s, border-color .45s" } },
+        inner,
+        it.name ? React.createElement("span", { style: { position: "absolute", top: "calc(100% + 12px)", left: "50%", transform: `translateX(-50%) translateY(${on ? 0 : -4}px)`, opacity: on ? 1 : 0,
+          transition: "opacity .3s, transform .3s", fontSize: 14, fontWeight: 600, color: "#f4f4f5", whiteSpace: "nowrap" } }, it.name) : null);
+    };
+    const set = (k) => items.map((it, i) => tile(it, i, k + i));
+    const appMarquee = React.createElement("div", {
+      onMouseEnter: () => this.setState({ paused: true }), onMouseLeave: () => this.setState({ paused: false, hov: -1 }),
+      style: { display: "flex", gap: 36, width: "max-content", padding: "16px 0 40px", animation: animate ? "rxMarquee 36s linear infinite" : "none", animationPlayState: this.state.paused ? "paused" : "running" } },
+      ...set("a"), ...set("b").map((el, i) => React.cloneElement(el, { key: "b" + i })));
+    const text = this.props.aboutText ?? "Rexiox is an independent studio that designs, builds and grows its own apps. We work in small teams, ship often, and care about every detail people touch.";
+    const ws = text.split(/\s+/), p = this.state.p;
+    const words = ws.map((t, i) => ({ t, o: (i / ws.length) < p ? 1 : 0.18 }));
+    const bh = this.state.bh, letters = "Rexiox".split("");
+    const ease = "cubic-bezier(.65,0,.25,1)";
+    const brand = React.createElement("span", {
+      onMouseEnter: () => this.setState({ bh: true }), onMouseLeave: () => this.setState({ bh: false }),
+      style: { display: "flex", alignItems: "center", gap: 10 } },
+      React.createElement("img", { src: "assets/logo-glyph.png", alt: "", style: { height: 22, width: "auto", display: "block",
+        animation: "rxLogoIn 1.1s cubic-bezier(.2,.7,.2,1) .1s both" } }),
+      React.createElement("span", { style: { display: "flex", fontSize: 20, fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.15, color: "#f4f4f5" } },
+        letters.map((l, i) => React.createElement("span", { key: i, style: { display: "inline-block", overflow: "hidden", height: "1.15em",
+            animation: `rxLetterIn .7s cubic-bezier(.2,.7,.2,1) ${(0.35 + i * 0.06).toFixed(2)}s both` } },
+          React.createElement("span", { style: { display: "flex", flexDirection: "column",
+              transform: bh ? "translateY(-50%)" : "translateY(0)", transition: `transform .55s ${ease} ${(i * 0.035).toFixed(3)}s` } },
+            React.createElement("span", null, l),
+            React.createElement("span", { style: { color: "var(--a3)" } }, l))))));
+    return {
+      brand,
+      appMarquee, iconRowRef: this.iconRowRef,
+      bars: React.createElement("div", { style: { position: "absolute", inset: 0, display: "flex", alignItems: "flex-end" } }, bars),
+      words, aboutRef: this.aboutRef,
+    };
+  }
+}
+</script>
 </body>
 </html>
