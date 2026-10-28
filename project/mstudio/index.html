@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Macropad — Your iPhone as a macro pad for your Mac</title>
   <meta name="description" content="Macropad turns your iPhone into a customizable macro pad for your Mac. Get the iOS app on the App Store and the free Macropad Helper for macOS.">
+  <link rel="icon" type="image/webp" href="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/3a/99/ce/3a99ceaa-3da7-7115-f82e-d515ebb388fb/Placeholder.mill/400x400Icon.ApSiOS01-75.webp">
+  <link rel="apple-touch-icon" href="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/3a/99/ce/3a99ceaa-3da7-7115-f82e-d515ebb388fb/Placeholder.mill/400x400Icon.ApSiOS01-75.webp">
   <style>
     :root {
       --bg: #f5f5f7;
@@ -62,14 +64,12 @@
     /* Hero */
     .hero { text-align: center; padding: 88px 0 64px; }
     .app-icon {
-      width: 96px; height: 96px; margin: 0 auto 28px;
+      display: block; width: 96px; height: 96px; margin: 0 auto 28px;
       border-radius: 22px;
-      background: linear-gradient(145deg, #5e5ce6, #0a84ff);
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 16px;
-      box-shadow: 0 10px 30px rgba(10, 132, 255, .3);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, .18);
     }
-    .app-icon span { background: rgba(255,255,255,.9); border-radius: 5px; }
-    .app-icon span:nth-child(5) { background: #ffd60a; }
+    .brand { display: inline-flex; align-items: center; gap: 8px; }
+    .brand img { width: 24px; height: 24px; border-radius: 6px; }
     h1 {
       font-size: clamp(36px, 6vw, 56px); line-height: 1.07; letter-spacing: -0.02em;
       margin: 0 0 16px; font-weight: 700;
@@ -133,7 +133,7 @@
 
 <header>
   <div class="wrap nav">
-    <a class="brand" href="index.html">Macropad</a>
+    <a class="brand" href="index.html"><img src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/3a/99/ce/3a99ceaa-3da7-7115-f82e-d515ebb388fb/Placeholder.mill/400x400Icon.ApSiOS01-75.webp" alt="">Macropad</a>
     <nav class="nav-links">
       <a href="download.html">Download</a>
       <a href="support.html">Support</a>
@@ -145,11 +145,7 @@
 
 <main>
   <div class="wrap hero">
-    <div class="app-icon" aria-hidden="true">
-      <span></span><span></span><span></span>
-      <span></span><span></span><span></span>
-      <span></span><span></span><span></span>
-    </div>
+    <img class="app-icon" src="https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/3a/99/ce/3a99ceaa-3da7-7115-f82e-d515ebb388fb/Placeholder.mill/400x400Icon.ApSiOS01-75.webp" alt="Macropad app icon" width="96" height="96">
     <h1>Your iPhone.<br>Your Mac's macro pad.</h1>
     <p class="lead">Trigger shortcuts, launch apps and manage windows on your Mac with one tap. Get Macropad for iPhone, then install the free Helper on your Mac.</p>
 
