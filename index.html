@@ -8,6 +8,9 @@
 <body>
 <x-dc>
 <helmet>
+<title>Rexiox — Independent app studio</title>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
@@ -19,60 +22,208 @@ a{color:#f4f4f5}a:hover{color:#fff}
 @keyframes rxRise{from{transform:scaleY(0.6);opacity:0}to{transform:scaleY(1);opacity:1}}
 @keyframes rxLogoIn{0%{opacity:0;transform:rotate(-120deg) scale(.3);filter:blur(6px)}70%{opacity:1;transform:rotate(8deg) scale(1.06);filter:blur(0)}100%{opacity:1;transform:none}}
 @keyframes rxLetterIn{from{opacity:0;transform:translateY(70%);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
-@keyframes rxShine{from{background-position:120% 0}to{background-position:-120% 0}}
-@keyframes rxGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(255,255,255,0))}50%{filter:drop-shadow(0 0 8px var(--a3))}}
+@keyframes rxHeaderIn{from{opacity:0;transform:translate(-50%,-24px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes rxWordIn{from{opacity:0;transform:translateY(0.35em);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes rxBreathe{0%,100%{scale:1 1}50%{scale:1 1.07}}
+@keyframes rxScrollDot{0%{transform:translateY(-100%);opacity:0}30%{opacity:1}100%{transform:translateY(260%);opacity:0}}
+@keyframes rxSpin{to{transform:rotate(360deg)}}
+@keyframes rxType{0%,10%{transform:scaleX(0.15)}45%,80%{transform:scaleX(1)}100%{transform:scaleX(0.15)}}
+@keyframes rxBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
 @keyframes rxMarquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 </style>
 </helmet>
 <div style="background:#050505;color:#f4f4f5;min-height:100vh;overflow-x:hidden">
 
-<section id="top" data-screen-label="Hero" style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow:visible">
-  <div style="position:absolute;left:0;right:0;top:0;height:145vh;overflow:hidden;pointer-events:none">{{ bars }}</div>
+<section id="top" data-screen-label="Hero" data-hero="1" style="position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;overflow:visible">
+  <div data-bars="1" style="position:absolute;left:0;right:0;top:0;height:145vh;overflow:hidden;pointer-events:none;will-change:transform">{{ bars }}<div style="position:absolute;left:0;right:0;top:83vh;bottom:0;pointer-events:none;background:linear-gradient(to bottom,rgba(5,5,5,0) 0%,rgba(5,5,5,0.2) 25%,rgba(5,5,5,0.55) 50%,rgba(5,5,5,0.85) 72%,rgba(5,5,5,0.97) 88%,#050505 100%)"></div></div>
+  <div data-spot="1" style="position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s ease;background:radial-gradient(520px circle at var(--mx,50%) var(--my,60%),color-mix(in srgb,var(--a3) 16%,transparent),transparent 65%)"></div>
   <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,#050505 0%,rgba(5,5,5,0.85) 35%,rgba(5,5,5,0) 60%)"></div>
-  <div style="position:absolute;left:0;right:0;top:83vh;height:62vh;pointer-events:none;background:linear-gradient(to bottom,rgba(5,5,5,0) 0%,rgba(5,5,5,0.2) 25%,rgba(5,5,5,0.55) 50%,rgba(5,5,5,0.85) 72%,rgba(5,5,5,0.97) 88%,#050505 100%)"></div>
 
-  <header style="position:fixed;z-index:20;top:20px;left:50%;transform:translateX(-50%);width:min(760px,calc(100% - 32px));display:flex;align-items:center;gap:16px;padding:10px 10px 10px 14px;border-radius:999px;background:rgba(24,24,27,0.72);border:1px solid rgba(255,255,255,0.07);backdrop-filter:blur(16px)">
+  <header data-header="1" style="position:fixed;z-index:20;top:20px;left:50%;transform:translateX(-50%);width:min(760px,calc(100% - 32px));transition:width .6s cubic-bezier(.2,.7,.2,1),background .4s ease,border-color .4s ease,top .5s cubic-bezier(.2,.7,.2,1);display:flex;align-items:center;gap:16px;padding:10px 10px 10px 14px;border-radius:999px;background:rgba(24,24,27,0.72);border:1px solid rgba(255,255,255,0.07);backdrop-filter:blur(16px)">
     <a href="#top" aria-label="Rexiox" style="display:flex;align-items:center;text-decoration:none;margin-right:auto;padding:2px 6px 2px 0">{{ brand }}</a>
-    <nav style="display:flex;align-items:center;gap:2px;font-size:15px">
-      <a href="#about" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#a1a1aa" style-hover="color:#fff;background:rgba(255,255,255,0.06)">About</a>
-      <a href="#apps" style="padding:8px 14px;border-radius:999px;text-decoration:none;color:#a1a1aa" style-hover="color:#fff;background:rgba(255,255,255,0.06)">Apps</a>
-      <a href="#contact" style="margin-left:6px;padding:9px 18px;border-radius:999px;text-decoration:none;background:#fff;color:#0a0a0a;font-weight:500" style-hover="background:#e7e7e9;color:#0a0a0a">Contact</a>
+    <nav data-nav="1" style="position:relative;display:flex;align-items:center;gap:2px;font-size:15px">
+      <span data-nav-pill="1" style="position:absolute;top:0;bottom:0;left:0;width:0;border-radius:999px;background:rgba(255,255,255,0.08);opacity:0;pointer-events:none;transition:left .45s cubic-bezier(.2,.7,.2,1),width .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease"></span>
+      <a href="#about" data-nav-link="1" style="position:relative;padding:8px 14px;border-radius:999px;text-decoration:none;color:#a1a1aa;transition:color .3s" style-hover="color:#fff">About</a>
+      <a href="#apps" data-nav-link="1" style="position:relative;padding:8px 14px;border-radius:999px;text-decoration:none;color:#a1a1aa;transition:color .3s" style-hover="color:#fff">Apps</a>
+      <a href="#services" data-nav-link="1" style="position:relative;padding:8px 14px;border-radius:999px;text-decoration:none;color:#a1a1aa;transition:color .3s" style-hover="color:#fff">Services</a>
+      <a href="#contact" style="margin-left:6px;transition:transform .45s cubic-bezier(.2,.7,.2,1),background .25s;padding:9px 18px;border-radius:999px;text-decoration:none;background:#fff;color:#0a0a0a;font-weight:500" style-hover="background:#e7e7e9;color:#0a0a0a">Contact</a>
     </nav>
   </header>
 
-  <div style="position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;text-align:center;padding:120px 20px 30vh">
-    <span style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8">Independent app studio</span>
-    <h1 style="margin:0;font-weight:600;font-size:clamp(42px,6.6vw,92px);line-height:1;letter-spacing:-0.05em;max-width:15ch;text-wrap:balance">We turn bold ideas into apps people use every day, everywhere.</h1>
-    <div style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:8px">
-      <a href="#apps" style="padding:15px 30px;border-radius:999px;background:#fff;color:#0a0a0a;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:-0.01em;box-shadow:0 0 32px rgba(255,255,255,0.28)" style-hover="background:#e7e7e9;color:#0a0a0a">Explore our apps</a>
-      <a href="#contact" style="padding:15px 30px;border-radius:999px;border:1px solid rgba(255,255,255,0.22);color:#f4f4f5;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:-0.01em;background:rgba(5,5,5,0.4)" style-hover="background:rgba(255,255,255,0.06);color:#fff">Get in touch</a>
+  <div data-reveal="1.4" style="position:absolute;left:50%;bottom:28px;margin-left:-30px;width:60px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none">
+    <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#a1a1aa">Scroll</span>
+    <div style="position:relative;width:1px;height:40px;overflow:hidden;background:rgba(255,255,255,0.14)">{{ scrollDot }}</div>
+  </div>
+  <div data-hero-content="1" style="position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;will-change:transform,opacity;text-align:center;padding:120px 20px 30vh">
+    <span data-reveal="0.2" style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8;background:rgba(5,5,5,0.35)">Independent app studio</span>
+    <h1 aria-label="We turn bold ideas into apps people use every day, everywhere." style="margin:0;font-weight:600;font-size:clamp(42px,6.6vw,92px);line-height:1.02;letter-spacing:-0.05em;max-width:15ch;text-wrap:balance;padding-bottom:0.06em">{{ heroTitle }}</h1>
+    <div data-reveal="0.55" style="display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:8px">
+      <a href="#apps" style="transition:transform .45s cubic-bezier(.2,.7,.2,1),background .25s;white-space:nowrap;padding:15px 30px;border-radius:999px;background:#fff;color:#0a0a0a;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:-0.01em;box-shadow:0 0 32px rgba(255,255,255,0.28)" style-hover="background:#e7e7e9;color:#0a0a0a">Explore our apps</a>
+      <a href="#contact" style="transition:transform .45s cubic-bezier(.2,.7,.2,1),background .25s;white-space:nowrap;padding:15px 30px;border-radius:999px;border:1px solid rgba(255,255,255,0.22);color:#f4f4f5;text-decoration:none;font-size:16px;font-weight:600;letter-spacing:-0.01em;background:rgba(5,5,5,0.4)" style-hover="background:rgba(255,255,255,0.06);color:#fff">Get in touch</a>
     </div>
   </div>
 </section>
 
 
 
-<section id="about" data-screen-label="About" ref="{{ aboutRef }}" style="position:relative;z-index:1;padding:clamp(96px,12vw,168px) clamp(16px,4vw,48px);max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center">
-  <span style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8">About Rexiox</span>
-  <p style="margin:0;font-size:clamp(28px,3.6vw,48px);line-height:1.12;font-weight:600;letter-spacing:-0.035em;text-wrap:balance">
-    <sc-for list="{{ words }}" as="w" hint-placeholder-count="0"><span style="opacity:{{ w.o }};transition:opacity 0.25s linear">{{ w.t }} </span></sc-for>
+<section id="about" data-screen-label="About" ref="{{ aboutRef }}" style="position:relative;z-index:1;isolation:isolate;padding:clamp(96px,12vw,168px) clamp(16px,4vw,48px);max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:32px;text-align:center">
+  
+  <div aria-hidden="true" style="position:absolute;left:50%;top:55%;width:min(900px,90vw);height:360px;margin:-180px 0 0 min(-450px,-45vw);border-radius:50%;background:var(--a2);filter:blur(140px);opacity:{{ aboutGlow }};pointer-events:none;z-index:-1;transition:opacity .4s ease"></div>
+  <span data-reveal="0" style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8;background:rgba(5,5,5,0.2)">About Rexiox</span>
+  <h2 data-reveal="0.1" style="margin:0;font-weight:600;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-0.05em;max-width:14ch;text-wrap:balance;background:linear-gradient(to bottom,#ffffff 35%,#8b8b90);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:0.06em">A small studio with a big focus</h2>
+  <p style="margin:0;max-width:40ch;font-size:clamp(19px,1.9vw,24px);line-height:1.5;font-weight:500;letter-spacing:-0.015em;text-wrap:pretty">
+    <sc-for list="{{ words }}" as="w" hint-placeholder-count="0"><span style="opacity:{{ w.o }};color:#f4f4f5;transition:opacity 0.35s ease">{{ w.t }} </span></sc-for>
   </p>
 </section>
 
 <section id="apps" data-screen-label="Apps" style="padding:0 clamp(12px,2vw,24px) clamp(96px,12vw,160px)">
   <div style="display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;padding:0 20px">
-    <span style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8">Our apps</span>
-    <h2 style="margin:0;font-weight:600;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-0.05em;max-width:12ch;text-wrap:balance;background:linear-gradient(to bottom,#ffffff 35%,#8b8b90);-webkit-background-clip:text;background-clip:text;color:transparent">Apps people open every day</h2>
-    <p style="margin:0;max-width:40ch;font-size:17px;line-height:1.5;color:#a1a1aa">Every app is designed, built and run by our own team.</p>
+    <span data-reveal="0" style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8">Our apps</span>
+    <h2 data-reveal="0.1" style="margin:0;font-weight:600;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-0.05em;max-width:12ch;text-wrap:balance;background:linear-gradient(to bottom,#ffffff 35%,#8b8b90);-webkit-background-clip:text;background-clip:text;color:transparent">Apps people open every day</h2>
+    <p data-reveal="0.2" style="margin:0;max-width:40ch;font-size:17px;line-height:1.5;color:#a1a1aa">Every app is designed, built and run by our own team.</p>
   </div>
-  <div ref="{{ iconRowRef }}" style="margin:clamp(48px,6vw,80px) calc(-1 * clamp(12px,2vw,24px)) clamp(64px,8vw,112px);overflow:hidden;-webkit-mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent);mask-image:linear-gradient(to right,transparent,#000 15%,#000 85%,transparent)">{{ appMarquee }}</div>
+  <div ref="{{ iconRowRef }}" data-reveal="0.3" style="position:relative;margin:clamp(8px,2vw,32px) calc(-1 * clamp(12px,2vw,24px)) clamp(8px,2vw,32px);padding:48px 0 40px;overflow:hidden">
+    {{ appMarquee }}
+    <div style="position:absolute;top:0;bottom:0;left:0;width:clamp(80px,24vw,340px);background:linear-gradient(to right,#050505 18%,rgba(5,5,5,0.85) 45%,rgba(5,5,5,0));pointer-events:none;z-index:3"></div>
+    <div style="position:absolute;top:0;bottom:0;right:0;width:clamp(80px,24vw,340px);background:linear-gradient(to left,#050505 18%,rgba(5,5,5,0.85) 45%,rgba(5,5,5,0));pointer-events:none;z-index:3"></div>
+    <div style="position:absolute;left:50%;top:252px;width:28px;height:3px;margin-left:-14px;border-radius:2px;background:#f4f4f5;opacity:{{ zoneDot }};pointer-events:none;z-index:4;transition:opacity .4s ease"></div>
+  </div>
+
+  <div style="display:grid;grid-template-rows:{{ panelRows }};transition:grid-template-rows .8s cubic-bezier(.16,1,.3,1)"><div style="min-height:0;overflow:hidden">
+  <div data-reveal="0.2" style="max-width:1200px;margin:0 auto;padding-bottom:8px;display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(40px,5vw,80px);align-items:flex-start;padding:0 clamp(4px,2vw,24px)">
+    <div style="flex:none;max-width:100%;opacity:{{ panelOpacity }};transform:translateY({{ panelShift }}px);transition:opacity .45s ease,transform .6s cubic-bezier(.16,1,.3,1)">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:22px">
+      <div style="position:relative;height:clamp(440px,48vw,640px);max-width:100%;display:flex;align-items:center;justify-content:center">
+        <sc-if value="{{ isMac }}" hint-placeholder-val="{{ false }}">
+          <div style="width:min(600px,calc(100vw - 48px),46vw);min-width:min(320px,calc(100vw - 48px));aspect-ratio:16 / 10;padding:6px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03)"><div style="position:relative;width:100%;height:100%;border-radius:7px;overflow:hidden;background:transparent">{{ slides }}<sc-if value="{{ noShot }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;border-radius:7px;border:1px dashed rgba(255,255,255,0.12);display:grid;place-items:center"><span style="font-family:'Geist Mono',monospace;font-size:11px;color:#71717a">{{ shotLabel }}</span></div></sc-if></div></div>
+        </sc-if>
+        <sc-if value="{{ isPhone }}" hint-placeholder-val="{{ true }}">
+          <div style="height:100%;aspect-ratio:9 / 19.5;padding:6px;border-radius:22px;background:transparent;border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03)"><div style="position:relative;width:100%;height:100%;border-radius:16px;overflow:hidden;background:transparent">{{ slides }}<sc-if value="{{ noShot }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;border-radius:16px;border:1px dashed rgba(255,255,255,0.12);display:grid;place-items:center"><span style="font-family:'Geist Mono',monospace;font-size:11px;color:#71717a">{{ shotLabel }}</span></div></sc-if></div></div>
+        </sc-if>
+        <sc-if value="{{ isDual }}" hint-placeholder-val="{{ false }}">
+          <div style="position:relative;height:100%;width:min(660px,calc(100vw - 48px),50vw);min-width:min(340px,calc(100vw - 48px))">
+            <div style="position:absolute;left:0;top:50%;width:84%;aspect-ratio:16 / 10;transform:translateY(-58%);padding:6px;border-radius:12px;background:transparent;border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03)">
+              <div style="position:relative;width:100%;height:100%;border-radius:7px;overflow:hidden">{{ macSlides }}<sc-if value="{{ noMacShot }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;border-radius:7px;border:1px dashed rgba(255,255,255,0.12);display:grid;place-items:center"><span style="font-family:'Geist Mono',monospace;font-size:11px;color:#71717a">{{ shotLabel }}</span></div></sc-if></div>
+            </div>
+            <div style="position:absolute;right:0;bottom:3%;height:70%;aspect-ratio:9 / 19.5;padding:5px;border-radius:26px;background:#050505;border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03),0 30px 60px -20px rgba(0,0,0,0.9)">
+              <div style="position:relative;width:100%;height:100%;border-radius:21px;overflow:hidden;background:#050505">{{ slides }}<sc-if value="{{ noShot }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;border-radius:21px;border:1px dashed rgba(255,255,255,0.12);display:grid;place-items:center"><span style="font-family:'Geist Mono',monospace;font-size:11px;color:#71717a">{{ shotLabel }}</span></div></sc-if></div>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ isTablet }}" hint-placeholder-val="{{ false }}">
+          <div style="height:100%;aspect-ratio:3 / 4;padding:7px;border-radius:20px;background:transparent;border:1px solid rgba(255,255,255,0.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.03)"><div style="position:relative;width:100%;height:100%;border-radius:13px;overflow:hidden;background:transparent">{{ slides }}<sc-if value="{{ noShot }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;border-radius:13px;border:1px dashed rgba(255,255,255,0.12);display:grid;place-items:center"><span style="font-family:'Geist Mono',monospace;font-size:11px;color:#71717a">{{ shotLabel }}</span></div></sc-if></div></div>
+        </sc-if>
+      </div>
+      <sc-if value="{{ multiShot }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:14px">
+          <button onClick="{{ prevShot }}" aria-label="Previous" style="width:38px;height:38px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:transparent;color:#f4f4f5;display:grid;place-items:center;cursor:pointer;padding:0;transition:background .25s,border-color .25s" style-hover="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f4f4f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></button>
+          <div style="display:flex;align-items:center;gap:6px">
+            <sc-for list="{{ dots }}" as="d" hint-placeholder-count="0"><button onClick="{{ d.go }}" aria-label="Screenshot" style="height:6px;width:{{ d.w }}px;padding:0;border:0;border-radius:3px;background:#f4f4f5;opacity:{{ d.o }};cursor:pointer;transition:width .4s cubic-bezier(.16,1,.3,1),opacity .3s"></button></sc-for>
+          </div>
+          <button onClick="{{ nextShot }}" aria-label="Next" style="width:38px;height:38px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:transparent;color:#f4f4f5;display:grid;place-items:center;cursor:pointer;padding:0;transition:background .25s,border-color .25s" style-hover="background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.3)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f4f4f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"></path></svg></button>
+        </div>
+      </sc-if>
+      </div>
+    </div>
+    <div style="flex:1 1 360px;max-width:480px;max-height:clamp(440px,48vw,640px);min-height:clamp(440px,48vw,640px);justify-content:center;display:flex;flex-direction:column;align-items:flex-start;gap:10px;opacity:{{ panelOpacity }};transform:translateY({{ panelShift }}px);transition:opacity .45s ease .06s,transform .6s cubic-bezier(.16,1,.3,1) .06s">
+      <sc-if value="{{ isReal }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px">
+        
+        <div style="display:flex;align-items:center;gap:14px">
+          {{ iconImg }}
+          <div style="display:flex;flex-direction:column;gap:8px">
+            
+            <h3 style="margin:0;font-weight:600;font-size:clamp(26px,2.6vw,34px);line-height:1.1;letter-spacing:-0.035em;background:linear-gradient(to bottom,#ffffff 35%,#8b8b90);-webkit-background-clip:text;background-clip:text;color:transparent">{{ cur.name }}</h3>
+            <div style="display:flex;align-items:center;gap:3px"><svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2.5l2.94 6.2 6.8.82-5.02 4.68 1.32 6.72L12 17.6l-6.04 3.32 1.32-6.72L2.26 9.52l6.8-.82z"></path></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2.5l2.94 6.2 6.8.82-5.02 4.68 1.32 6.72L12 17.6l-6.04 3.32 1.32-6.72L2.26 9.52l6.8-.82z"></path></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2.5l2.94 6.2 6.8.82-5.02 4.68 1.32 6.72L12 17.6l-6.04 3.32 1.32-6.72L2.26 9.52l6.8-.82z"></path></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2.5l2.94 6.2 6.8.82-5.02 4.68 1.32 6.72L12 17.6l-6.04 3.32 1.32-6.72L2.26 9.52l6.8-.82z"></path></svg><svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff"><path d="M12 2.5l2.94 6.2 6.8.82-5.02 4.68 1.32 6.72L12 17.6l-6.04 3.32 1.32-6.72L2.26 9.52l6.8-.82z"></path></svg><span style="margin-left:6px;font-size:13px;color:#a1a1aa">{{ cur.rating }}</span></div>
+          </div>
+          
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <p style="margin:0 0 2px;max-width:40ch;font-size:clamp(16px,1.4vw,19px);line-height:1.4;font-weight:500;letter-spacing:-0.015em;color:#ececee;text-wrap:pretty">{{ cur.desc }}</p>
+          <sc-if value="{{ cur.desc2 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;max-width:44ch;font-size:14px;line-height:1.55;color:#8b8b92;text-wrap:pretty">{{ cur.desc2 }}</p></sc-if>
+          <sc-if value="{{ cur.desc3 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;max-width:44ch;font-size:14px;line-height:1.55;color:#8b8b92;text-wrap:pretty">{{ cur.desc3 }}</p></sc-if>
+          <sc-if value="{{ cur.desc4 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;max-width:44ch;font-size:14px;line-height:1.55;color:#8b8b92;text-wrap:pretty">{{ cur.desc4 }}</p></sc-if>
+          <sc-if value="{{ cur.desc5 }}" hint-placeholder-val="{{ false }}"><p style="margin:0;max-width:44ch;font-size:14px;line-height:1.55;color:#8b8b92;text-wrap:pretty">{{ cur.desc5 }}</p></sc-if>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;align-items:center;gap:10px;align-self:stretch;max-width:44ch;margin-top:14px">
+          <sc-if value="{{ cur.appStore }}" hint-placeholder-val="{{ false }}"><a href="{{ cur.appStore }}" target="_blank" style="display:flex;align-items:center;gap:10px;padding:8px 16px 8px 13px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.16);color:#f4f4f5;text-decoration:none;white-space:nowrap;transition:transform .45s cubic-bezier(.2,.7,.2,1),background .25s,border-color .25s" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.28);color:#fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"></path></svg><span style="display:flex;flex-direction:column;line-height:1.1"><span style="font-size:10px;color:#a1a1aa">Download on the</span><span style="font-size:15px;font-weight:600;letter-spacing:-0.01em">App Store</span></span></a></sc-if>
+          <sc-if value="{{ cur.playStore }}" hint-placeholder-val="{{ false }}"><a href="{{ cur.playStore }}" target="_blank" style="display:flex;align-items:center;gap:10px;padding:8px 16px 8px 13px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.16);color:#f4f4f5;text-decoration:none;white-space:nowrap;transition:transform .45s cubic-bezier(.2,.7,.2,1),background .25s,border-color .25s" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.28);color:#fff"><svg width="18" height="18" viewBox="0 0 24 24" fill="#ffffff"><path d="M22.018 13.298l-3.919 2.218-3.515-3.493 3.543-3.521 3.891 2.202a1.49 1.49 0 0 1 0 2.594zM1.337.924a1.486 1.486 0 0 0-.112.568v21.017c0 .217.045.419.124.6l11.155-11.087L1.337.924zm12.207 10.065l3.258-3.238L3.45.195a1.466 1.466 0 0 0-.946-.179l11.04 10.973zm0 2.067l-11 10.933c.298.036.612-.016.906-.183l13.324-7.54-3.23-3.21z"></path></svg><span style="display:flex;flex-direction:column;line-height:1.1"><span style="font-size:10px;color:#a1a1aa">Get it on</span><span style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Google Play</span></span></a></sc-if>
+          <sc-if value="{{ cur.macos }}" hint-placeholder-val="{{ false }}"><a href="{{ cur.macos }}" target="_blank" style="display:flex;align-items:center;gap:10px;padding:8px 16px 8px 13px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.16);color:#f4f4f5;text-decoration:none;white-space:nowrap;transition:transform .45s cubic-bezier(.2,.7,.2,1),background .25s,border-color .25s" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.28);color:#fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"></path></svg><span style="display:flex;flex-direction:column;line-height:1.1"><span style="font-size:10px;color:#a1a1aa">Download on the</span><span style="font-size:15px;font-weight:600;letter-spacing:-0.01em">Mac App Store</span></span></a></sc-if>
+          <sc-if value="{{ cur.dmg }}" hint-placeholder-val="{{ false }}"><a href="{{ cur.dmg }}" style="display:flex;align-items:center;gap:10px;padding:8px 16px 8px 13px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.16);color:#f4f4f5;text-decoration:none;white-space:nowrap;transition:transform .45s cubic-bezier(.2,.7,.2,1),background .25s,border-color .25s" style-hover="background:rgba(255,255,255,0.09);border-color:rgba(255,255,255,0.28);color:#fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="#ffffff"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"></path></svg><span style="display:flex;flex-direction:column;line-height:1.1"><span style="font-size:10px;color:#a1a1aa">Download for</span><span style="font-size:15px;font-weight:600;letter-spacing:-0.01em">macOS</span></span></a></sc-if>
+          <sc-if value="{{ cur.badge }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:6px;margin-left:6px;align-self:center"><svg width="14" height="28" viewBox="0 0 20 40" fill="#f4f4f5" style="display:block"><path d="M15 38 C6 32 3 20 7 4" fill="none" stroke="#f4f4f5" stroke-width="1.3" stroke-linecap="round"></path><ellipse cx="10.8" cy="34" rx="3.6" ry="1.6" transform="rotate(-80 14 35)"></ellipse><ellipse cx="17" cy="33.4" rx="3.4" ry="1.5" transform="rotate(0 14 35)"></ellipse><ellipse cx="7.3" cy="29" rx="3.6" ry="1.6" transform="rotate(-65 10.5 30)"></ellipse><ellipse cx="13.5" cy="28.4" rx="3.4" ry="1.5" transform="rotate(-15 10.5 30)"></ellipse><ellipse cx="4.6" cy="23.5" rx="3.6" ry="1.6" transform="rotate(-50 7.8 24.5)"></ellipse><ellipse cx="10.8" cy="22.9" rx="3.4" ry="1.5" transform="rotate(-30 7.8 24.5)"></ellipse><ellipse cx="3.2" cy="17.5" rx="3.6" ry="1.6" transform="rotate(-35 6.4 18.5)"></ellipse><ellipse cx="9.4" cy="16.9" rx="3.4" ry="1.5" transform="rotate(-45 6.4 18.5)"></ellipse><ellipse cx="3" cy="11.5" rx="3.6" ry="1.6" transform="rotate(-20 6.2 12.5)"></ellipse><ellipse cx="9.2" cy="10.9" rx="3.4" ry="1.5" transform="rotate(-60 6.2 12.5)"></ellipse><ellipse cx="3.5999999999999996" cy="6" rx="3.6" ry="1.6" transform="rotate(-5 6.8 7)"></ellipse><ellipse cx="9.8" cy="5.4" rx="3.4" ry="1.5" transform="rotate(-75 6.8 7)"></ellipse></svg><div style="display:flex;flex-direction:column;align-items:center;gap:2px;line-height:1"><div style="display:flex;align-items:center;gap:4px"><svg width="13" height="13" viewBox="0 0 24 24" fill="#f4f4f5"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"></path></svg><span style="font-size:13px;font-weight:600;letter-spacing:-0.01em;color:#f4f4f5">App Store</span></div><span style="font-size:11px;color:#a1a1aa;white-space:nowrap">{{ cur.badge }}</span></div><svg width="14" height="28" viewBox="0 0 20 40" fill="#f4f4f5" style="display:block;transform:scaleX(-1)"><path d="M15 38 C6 32 3 20 7 4" fill="none" stroke="#f4f4f5" stroke-width="1.3" stroke-linecap="round"></path><ellipse cx="10.8" cy="34" rx="3.6" ry="1.6" transform="rotate(-80 14 35)"></ellipse><ellipse cx="17" cy="33.4" rx="3.4" ry="1.5" transform="rotate(0 14 35)"></ellipse><ellipse cx="7.3" cy="29" rx="3.6" ry="1.6" transform="rotate(-65 10.5 30)"></ellipse><ellipse cx="13.5" cy="28.4" rx="3.4" ry="1.5" transform="rotate(-15 10.5 30)"></ellipse><ellipse cx="4.6" cy="23.5" rx="3.6" ry="1.6" transform="rotate(-50 7.8 24.5)"></ellipse><ellipse cx="10.8" cy="22.9" rx="3.4" ry="1.5" transform="rotate(-30 7.8 24.5)"></ellipse><ellipse cx="3.2" cy="17.5" rx="3.6" ry="1.6" transform="rotate(-35 6.4 18.5)"></ellipse><ellipse cx="9.4" cy="16.9" rx="3.4" ry="1.5" transform="rotate(-45 6.4 18.5)"></ellipse><ellipse cx="3" cy="11.5" rx="3.6" ry="1.6" transform="rotate(-20 6.2 12.5)"></ellipse><ellipse cx="9.2" cy="10.9" rx="3.4" ry="1.5" transform="rotate(-60 6.2 12.5)"></ellipse><ellipse cx="3.5999999999999996" cy="6" rx="3.6" ry="1.6" transform="rotate(-5 6.8 7)"></ellipse><ellipse cx="9.8" cy="5.4" rx="3.4" ry="1.5" transform="rotate(-75 6.8 7)"></ellipse></svg></div></sc-if>
+          
+        </div>
+        <sc-if value="{{ cur.note }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;color:#71717a">{{ cur.note }}</span></sc-if>
+        
+      </div>
+      </sc-if>
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:20px;width:100%">
+        <div style="display:flex;align-items:center;gap:14px">
+          <div style="width:56px;height:56px;border-radius:14px;background:rgba(255,255,255,0.05);border:1px dashed rgba(255,255,255,0.16)"></div>
+          <span style="padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#a1a1aa">Coming soon</span>
+        </div>
+        <div style="width:min(340px,70%);height:46px;border-radius:12px;background:rgba(255,255,255,0.06)"></div>
+        <div style="display:flex;flex-direction:column;gap:10px;width:min(440px,100%)">
+          <div style="height:14px;border-radius:7px;background:rgba(255,255,255,0.05)"></div>
+          <div style="height:14px;width:88%;border-radius:7px;background:rgba(255,255,255,0.05)"></div>
+          <div style="height:14px;width:62%;border-radius:7px;background:rgba(255,255,255,0.05)"></div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:8px">
+          <div style="width:150px;height:52px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08)"></div>
+          <div style="width:150px;height:52px;border-radius:16px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08)"></div>
+        </div>
+      </div>
+      </sc-if>
+    </div>
+  </div>
+  </div></div>
   </section>
 
 
 
+<section id="services" data-screen-label="Services" style="padding:0 clamp(16px,4vw,48px) clamp(96px,12vw,160px);max-width:1280px;margin:0 auto">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;margin-bottom:clamp(40px,5vw,64px)">
+    <span data-reveal="0" style="padding:6px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8">Services</span>
+    <h2 data-reveal="0.1" style="margin:0;font-weight:600;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-0.05em;max-width:14ch;text-wrap:balance;background:linear-gradient(to bottom,#ffffff 35%,#8b8b90);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:0.06em">We build for others, too</h2>
+    <p data-reveal="0.2" style="margin:0;max-width:44ch;font-size:17px;line-height:1.5;color:#a1a1aa">The team behind our apps works with companies on strategy and on the software itself.</p>
+  </div>
+  <article data-reveal="0" data-spotcard="1" style="position:relative;overflow:hidden;display:block;border-radius:32px;background:linear-gradient(to bottom,#0e0e10,#09090a);border:1px solid rgba(255,255,255,0.07)">
+    <div data-spotlayer="1" style="position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s ease;background:radial-gradient(460px circle at var(--x,50%) var(--y,0%),color-mix(in srgb,var(--a3) 11%,transparent),transparent 62%)"></div><div data-spotlayer="1" style="position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;opacity:0;transition:opacity .5s ease;background:radial-gradient(320px circle at var(--x,50%) var(--y,0%),color-mix(in srgb,var(--a3) 70%,transparent),transparent 70%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude"></div>
+      
+
+    <div style="position:relative;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(32px,4vw,64px);padding:clamp(28px,4vw,56px)">
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="flex:none;width:64px;height:64px;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);display:grid;place-items:center">{{ visConsult }}</div>
+            <h3 style="margin:0;font-weight:600;font-size:clamp(26px,2.6vw,36px);line-height:1.05;letter-spacing:-0.04em;background:linear-gradient(to bottom,#ffffff 35%,#8b8b90);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:0.04em">Consulting</h3>
+            <span style="margin-left:auto;font-family:'Geist Mono',monospace;font-size:13px;color:#71717a">01</span>
+          </div>
+          <p style="margin:0;max-width:46ch;font-size:16px;line-height:1.55;color:#a1a1aa;text-wrap:pretty">Product strategy, technical direction and architecture reviews, so you know what to build and how before you commit.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:#d4d4d8">Product strategy</span><span style="font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:#d4d4d8">Architecture</span><span style="font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:#d4d4d8">Roadmapping</span></div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="flex:none;width:64px;height:64px;border-radius:18px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.02);display:grid;place-items:center">{{ visDev }}</div>
+            <h3 style="margin:0;font-weight:600;font-size:clamp(26px,2.6vw,36px);line-height:1.05;letter-spacing:-0.04em;background:linear-gradient(to bottom,#ffffff 35%,#8b8b90);-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:0.04em">Software development</h3>
+            <span style="margin-left:auto;font-family:'Geist Mono',monospace;font-size:13px;color:#71717a">02</span>
+          </div>
+          <p style="margin:0;max-width:46ch;font-size:16px;line-height:1.55;color:#a1a1aa;text-wrap:pretty">Native apps, web products and backends, designed and built end to end by the same team that ships our own apps.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:#d4d4d8">iOS &amp; macOS</span><span style="font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:#d4d4d8">Android</span><span style="font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:#d4d4d8">Web</span><span style="font-size:13px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);color:#d4d4d8">Backend &amp; APIs</span></div>
+        </div>
+    </div>
+  </article>
+
+  <div data-reveal="0.1" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-top:clamp(40px,5vw,56px)">
+    <span style="font-size:clamp(20px,2vw,24px);font-weight:600;letter-spacing:-0.03em;color:#ececee">Have a project in mind?</span>
+    <a href="mailto:hello@rexiox.com" style="display:flex;align-items:center;gap:10px;padding:13px 16px 13px 24px;border-radius:999px;background:#fff;color:#0a0a0a;text-decoration:none;font-size:15px;font-weight:600;white-space:nowrap;transition:background .25s,gap .35s cubic-bezier(.16,1,.3,1)" style-hover="background:#e7e7e9;color:#0a0a0a;gap:14px">Start a project<span style="width:26px;height:26px;border-radius:999px;background:#0a0a0a;display:grid;place-items:center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></span></a>
+  </div>
+</section>
+
 <footer id="contact" data-screen-label="Footer" style="padding:0 clamp(16px,4vw,48px) 32px">
   <div style="max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:48px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:40px;padding-top:48px;border-top:1px solid rgba(255,255,255,0.07)">
+    <div data-reveal="0" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:40px;padding-top:48px;border-top:1px solid rgba(255,255,255,0.07)">
       <div style="display:flex;flex-direction:column;gap:14px;grid-column:span 2">
         <div style="display:flex;align-items:center;gap:10px">
           <img src="assets/logo-white.png" alt="" style="width:32px;height:32px;border-radius:50%">
@@ -84,6 +235,7 @@ a{color:#f4f4f5}a:hover{color:#fff}
         <span style="font-size:13px;color:#71717a">Pages</span>
         <a href="#about" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">About</a>
         <a href="#apps" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">Apps</a>
+        <a href="#services" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">Services</a>
         <a href="#contact" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">Contact</a>
       </div>
       <div style="display:flex;flex-direction:column;gap:12px;font-size:15px">
@@ -93,7 +245,7 @@ a{color:#f4f4f5}a:hover{color:#fff}
         <a href="#" style="color:#d4d4d8;text-decoration:none" style-hover="color:#fff">LinkedIn</a>
       </div>
     </div>
-    <div style="font-size:clamp(80px,19vw,280px);font-weight:600;letter-spacing:-0.07em;line-height:0.8;background:linear-gradient(to bottom,#2a2a2e,#050505);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none">rexiox</div>
+    <div data-reveal="0.1" data-reveal-y="120" style="font-size:clamp(80px,19vw,280px);font-weight:600;letter-spacing:-0.07em;line-height:0.8;background:linear-gradient(to bottom,#2a2a2e,#050505);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none">rexiox</div>
     <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:#71717a">
       <span>© 2026 Rexiox. All rights reserved.</span>
       <span>Privacy · Terms</span>
@@ -102,7 +254,7 @@ a{color:#f4f4f5}a:hover{color:#fff}
 </footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;red&quot;,&quot;violet&quot;,&quot;blue&quot;,&quot;white&quot;,&quot;gray&quot;,&quot;orange&quot;,&quot;green&quot;,&quot;pink&quot;,&quot;gold&quot;,&quot;cyan&quot;],&quot;default&quot;:&quot;red&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;aboutText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Rexiox is an independent studio that designs, builds and grows its own apps. We work in small teams, ship often, and care about every detail people touch.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;barCount&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:9,&quot;max&quot;:31,&quot;step&quot;:2,&quot;default&quot;:17,&quot;tsType&quot;:&quot;number&quot;},&quot;animate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;red&quot;,&quot;violet&quot;,&quot;blue&quot;,&quot;white&quot;,&quot;gray&quot;,&quot;orange&quot;,&quot;green&quot;,&quot;pink&quot;,&quot;gold&quot;,&quot;cyan&quot;],&quot;default&quot;:&quot;red&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;aboutText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Rexiox is an independent studio that designs, builds and grows its own apps. We work in small teams, ship often, and care about every detail people touch.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;barCount&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:9,&quot;max&quot;:31,&quot;step&quot;:2,&quot;default&quot;:17,&quot;tsType&quot;:&quot;number&quot;},&quot;animate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;holdSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:2,&quot;max&quot;:20,&quot;step&quot;:1,&quot;default&quot;:20,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;}}">
 class Component extends DCLogic {
   state = { p: 0, hov: -1, paused: false, bh: false, bk: 0 };
   iconRowRef = React.createRef();
@@ -123,21 +275,172 @@ class Component extends DCLogic {
     const p = this.palettes[this.props.palette ?? "red"] || this.palettes.red;
     ["--a1", "--a2", "--a3", "--a4"].forEach((k, i) => document.body.style.setProperty(k, p[i]));
   }
+  motionOK() { return (this.props.animate ?? true) && !window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
   onScroll = () => {
-    const el = this.aboutRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect(), vh = window.innerHeight;
-    const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height * 0.9)));
-    if (Math.abs(p - this.state.p) > 0.005) this.setState({ p });
+    if (this.raf) return;
+    this.raf = requestAnimationFrame(() => {
+      this.raf = 0;
+      const y = window.scrollY, vh = window.innerHeight, m = this.motionOK();
+      const el = this.aboutRef.current;
+      if (el) {
+        const r = el.getBoundingClientRect();
+        const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height * 0.9)));
+        if (Math.abs(p - this.state.p) > 0.003) this.setState({ p });
+      }
+      const q = s => document.querySelector(s);
+      const hc = q('[data-hero-content]'), bars = q('[data-bars]'), hd = q('[data-header]');
+      if (m && hc && y < vh * 1.5) {
+        const t = Math.min(1, y / (vh * 0.75));
+        hc.style.transform = `translateY(${y * 0.28}px) scale(${1 - t * 0.05})`;
+        hc.style.opacity = String(1 - t);
+        hc.style.filter = `blur(${t * 6}px)`;
+        if (bars) bars.style.transform = `translateY(${y * 0.12}px)`;
+      }
+      if (hd) {
+        const s = y > 40;
+        hd.style.width = s ? "min(620px, calc(100% - 32px))" : "min(760px, calc(100% - 32px))";
+        hd.style.top = s ? "12px" : "20px";
+        hd.style.background = s ? "rgba(14,14,16,0.86)" : "rgba(24,24,27,0.72)";
+        hd.style.borderColor = s ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.07)";
+      }
+    });
   };
-  componentDidMount() {
+  onHeroMove = (e) => {
+    const sec = e.currentTarget, rc = sec.getBoundingClientRect();
+    const fx = (e.clientX - rc.left) / rc.width, fy = (e.clientY - rc.top) / rc.height;
+    sec.style.setProperty("--mx", (fx * 100).toFixed(1) + "%"); sec.style.setProperty("--my", (fy * 100).toFixed(1) + "%");
+    const spot = sec.querySelector('[data-spot]'); if (spot) spot.style.opacity = "1";
+    const bs = sec.querySelectorAll('[data-bar]'), n = bs.length, ci = fx * n - 0.5;
+    bs.forEach((b, i) => { const g = Math.exp(-((i - ci) ** 2) / (2 * 2.2 ** 2)); b.style.transform = `scaleY(${(1 + g * 0.1).toFixed(4)})`; });
+  };
+  onHeroLeave = (e) => {
+    const sec = e.currentTarget; const spot = sec.querySelector('[data-spot]'); if (spot) spot.style.opacity = "0";
+    sec.querySelectorAll('[data-bar]').forEach(b => b.style.transform = "scaleY(1)");
+  };
+  setupMotion() {
+    const m = this.motionOK(), off = [];
+    const on = (el, ev, fn, o) => { el.addEventListener(ev, fn, o); off.push(() => el.removeEventListener(ev, fn, o)); };
+    // reveals
     const els = document.querySelectorAll('[data-reveal]');
-    els.forEach((el, i) => { el.style.opacity = 0; el.style.transform = 'translateY(56px) scale(0.98)'; el.style.transition = 'opacity 0.9s ease ' + (i % 2) * 0.12 + 's, transform 1s cubic-bezier(.2,.7,.2,1) ' + (i % 2) * 0.12 + 's'; });
-    this.io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.style.opacity = 1; e.target.style.transform = 'none'; this.io.unobserve(e.target); } }), { threshold: 0.15 });
-    els.forEach(el => this.io.observe(el));
-    this.applyPalette(); window.addEventListener("scroll", this.onScroll, { passive: true }); this.onScroll(); }
-  componentDidUpdate() { this.applyPalette(); }
-  componentWillUnmount() { this.io && this.io.disconnect(); window.removeEventListener("scroll", this.onScroll); }
+    if (m) {
+      els.forEach(el => {
+        const d = parseFloat(el.dataset.reveal || 0), dy = el.dataset.revealY || 36;
+        el.style.opacity = 0; el.style.transform = `translateY(${dy}px)`; el.style.filter = "blur(10px)";
+        el.style.transition = `opacity 1s ease ${d}s, transform 1.2s cubic-bezier(.16,1,.3,1) ${d}s, filter 1s ease ${d}s`;
+      });
+      this.io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) {
+        const t = e.target; t.style.opacity = 1; t.style.transform = "none"; t.style.filter = "none"; this.io.unobserve(t);
+        setTimeout(() => { if (!t.hasAttribute('data-magnetic')) t.style.transition = ""; }, 2400);
+      } }), { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+      els.forEach(el => this.io.observe(el));
+      const show = t => { t.style.opacity = 1; t.style.transform = "none"; t.style.filter = "none"; this.io && this.io.unobserve(t); };
+      requestAnimationFrame(() => els.forEach(el => { if (el.getBoundingClientRect().top < window.innerHeight) show(el); }));
+      this.fb = setTimeout(() => els.forEach(el => { if (el.style.opacity === "0" && el.getBoundingClientRect().top < window.innerHeight * 1.2) show(el); }), 2500);
+    }
+    const hd = document.querySelector('[data-header]');
+    if (hd && m) hd.style.animation = "rxHeaderIn 1s cubic-bezier(.16,1,.3,1) .05s both";
+    // nav pill
+    const nav = document.querySelector('[data-nav]'), pill = document.querySelector('[data-nav-pill]');
+    if (nav && pill) {
+      nav.querySelectorAll('[data-nav-link]').forEach(l => on(l, "mouseenter", () => {
+        pill.style.left = l.offsetLeft + "px"; pill.style.width = l.offsetWidth + "px"; pill.style.opacity = "1";
+      }));
+      on(nav, "mouseleave", () => { pill.style.opacity = "0"; });
+    }
+    // magnetic buttons
+    if (false) document.querySelectorAll('[data-magnetic]').forEach(b => {
+      on(b, "mousemove", e => { const r = b.getBoundingClientRect();
+        b.style.transform = `translate(${((e.clientX - r.left - r.width / 2) * 0.22).toFixed(1)}px, ${((e.clientY - r.top - r.height / 2) * 0.32).toFixed(1)}px)`; });
+      on(b, "mouseleave", () => { b.style.transform = "translate(0,0)"; });
+    });
+    document.querySelectorAll('[data-spotcard]').forEach(c => {
+      const ls = c.querySelectorAll('[data-spotlayer]');
+      on(c, "mousemove", e => { const b = c.getBoundingClientRect(); c.style.setProperty("--x", (e.clientX - b.left) + "px"); c.style.setProperty("--y", (e.clientY - b.top) + "px"); ls.forEach(l => l.style.opacity = "1"); });
+      on(c, "mouseleave", () => ls.forEach(l => l.style.opacity = "0"));
+    });
+    // hero cursor
+    const hero = document.querySelector('[data-hero]');
+    if (hero && m && window.matchMedia("(pointer: fine)").matches) { on(hero, "mousemove", this.onHeroMove); on(hero, "mouseleave", this.onHeroLeave); }
+    on(window, "scroll", this.onScroll, { passive: true });
+    on(window, "resize", this.onScroll);
+    this.off = off;
+    this.onScroll();
+  }
+  STEP = 160; x = 0; sp = 1; hold = 0;
+  trackRef = React.createRef();
+  shotsOf(c) { return (c && (c.shots && c.shots.length ? c.shots : (c.shot ? [c.shot] : []))) || []; }
+  countOf(c) { return Math.max(this.shotsOf(c).length, (c && c.macShots || []).length); }
+  goShot = (i) => { const n = this.countOf(this.curItem); if (n < 2) return; this.setState({ slide: (i + n) % n }); this.slideT = performance.now(); };
+  slideVals(cur) {
+    const shots = this.shotsOf(cur), mshots = (cur && cur.macShots) || [], n = this.countOf(cur), s = Math.min(this.state.slide || 0, Math.max(0, n - 1));
+    this.curItem = cur;
+    const sw = { onPointerDown: e => { this.sx = e.clientX; }, onPointerUp: e => { if (this.sx == null) return; const dx = e.clientX - this.sx; this.sx = null; if (Math.abs(dx) > 30) this.goShot(s + (dx < 0 ? 1 : -1)); }, onDragStart: e => e.preventDefault() };
+    const mk = (list) => list.length ? React.createElement("div", { ...sw, style: { position: "absolute", inset: 0, display: "flex", cursor: list.length > 1 ? "grab" : "default", touchAction: "pan-y", userSelect: "none", transform: `translateX(${-(s % list.length) * 100}%)`, transition: "transform .8s cubic-bezier(.65,0,.25,1)" } },
+      list.map((src, i) => React.createElement("img", { key: src + i, src, alt: (cur.name || "") + " screenshot " + (i + 1), style: { flex: "none", width: "100%", height: "100%", objectFit: "cover", display: "block" } }))) : null;
+    return { slides: mk(shots), macSlides: mk(mshots), noShot: !shots.length, noMacShot: !mshots.length, multiShot: n > 1,
+      dots: Array.from({ length: n }, (_, i) => ({ w: i === s ? 22 : 6, o: i === s ? 1 : 0.3, go: () => this.goShot(i) })),
+      prevShot: () => this.goShot(s - 1), nextShot: () => this.goShot(s + 1) };
+  }
+  pick = (i) => {
+    if (!this.state.open) { this.setState({ active: i, open: true, zone: true, fading: false }); return; }
+    if (this.pendingIdx === i) return;
+    if (this.pendingIdx == null && i === (this.state.active ?? 0)) { if (!this.state.zone) this.setState({ zone: true }); return; }
+    this.pendingIdx = i;
+    this.setState({ fading: true, zone: true });
+    clearTimeout(this.ft); this.ft = setTimeout(() => { this.pendingIdx = null; this.setState({ active: i, fading: false, slide: 0 }); this.slideT = performance.now(); }, 300);
+  };
+  centerTile = (j) => {
+    const row = this.iconRowRef.current; if (!row) return;
+    const N = this.itemCount, W = N * this.STEP, cx = row.clientWidth / 2;
+    let to = cx - (j * this.STEP + 62);
+    while (to <= -W) to += W; while (to > 0) to -= W;
+    let from = this.x;
+    if (to - from > W / 2) from += W; else if (from - to > W / 2) from -= W;
+    this.anim = { from, to, t0: performance.now(), d: 1000 };
+    this.pick(j % N);
+  };
+  tick = (t) => {
+    this.tr = requestAnimationFrame(this.tick);
+    const dt = Math.min(0.05, (t - (this.lt || t)) / 1000); this.lt = t;
+    const row = this.iconRowRef.current, track = this.trackRef.current; if (!row || !track) return;
+    const N = this.itemCount, W = N * this.STEP, cx = row.clientWidth / 2;
+    if (this.lastCx != null && this.lastCx !== cx) { this.x += cx - this.lastCx; if (this.anim) { this.anim.from += cx - this.lastCx; this.anim.to += cx - this.lastCx; } }
+    this.lastCx = cx;
+    if (this.anim) {
+      const a = this.anim, k = Math.min(1, (t - a.t0) / a.d), e = 1 - Math.pow(1 - k, 4);
+      this.x = a.from + (a.to - a.from) * e;
+      if (k >= 1) { this.anim = null; this.x = a.to; this.hold = t + (this.props.holdSeconds ?? 6) * 1000; }
+    } else {
+      if (!this.inited) { this.inited = true; this.x = cx - (N * this.STEP + 62); this.hold = t + (this.props.holdSeconds ?? 6) * 1000; }
+      if (this.hoverPause && t > this.hold - 1500) this.hold = t + 1500;
+      if (this.motionOK() && t > this.hold) {
+        const jc = Math.round((cx - this.x - 62) / this.STEP), m = this.realMask || [];
+        const ic = ((jc % N) + N) % N; let step = 0;
+        for (let q = 1; q <= N; q++) { if (m[(ic + q) % N]) { step = q; break; } }
+        if (!step || step === N) { this.hold = t + 1000; return; }
+        let to = cx - ((jc + step) * this.STEP + 62), from = this.x;
+        while (to <= -W) { to += W; from += W; }
+        this.anim = { from, to, t0: t, d: Math.min(2400, 900 + step * 180) };
+      }
+    }
+    if (this.motionOK() && this.countOf(this.curItem) > 1 && t - (this.slideT || 0) > 3500) { this.slideT = t; this.goShot((this.state.slide || 0) + 1); }
+    track.style.transform = `translate3d(${this.x.toFixed(2)}px,0,0)`;
+    const kids = track.children;
+    for (let q = 0; q < kids.length; q++) {
+      const dd = Math.min(3, Math.abs(this.x + q * this.STEP + 62 - cx) / this.STEP), near = Math.max(0, 1 - dd);
+      kids[q].style.transform = `scale(${(0.9 + 0.26 * near * near).toFixed(3)})`;
+      kids[q].style.opacity = (1 - Math.min(dd, 2.5) * 0.24).toFixed(3);
+    }
+    if (this.anim) return;
+    const want = this.pendingIdx ?? (this.state.active ?? -1);
+    const j = Math.round((cx - this.x - 62) / this.STEP), d = Math.abs(this.x + j * this.STEP + 62 - cx), idx = ((j % N) + N) % N;
+    if (d < 58 && (this.realMask || [])[idx]) { if (idx !== want || !this.state.zone || !this.state.open) this.pick(idx); }
+    else if (this.state.zone) this.setState({ zone: false });
+  };
+  componentDidMount() { this.applyPalette(); this.setupMotion(); this.tr = requestAnimationFrame(this.tick); }
+  componentDidUpdate(pp) { this.applyPalette(); if (pp.animate !== this.props.animate) { this.teardown(); this.setupMotion(); } }
+  teardown() { clearTimeout(this.fb); this.io && this.io.disconnect(); (this.off || []).forEach(f => f()); if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0; }
+  componentWillUnmount() { this.teardown(); cancelAnimationFrame(this.tr); clearTimeout(this.ft); }
   renderVals() {
     const n = this.props.barCount ?? 19;
     const animate = this.props.animate ?? true;
@@ -145,48 +448,58 @@ class Component extends DCLogic {
     const bars = [];
     for (let i = 0; i < n; i++) {
       const d = Math.abs(i - mid) / mid;
-      bars.push(React.createElement("div", { key: i, style: {
-        flex: 1, height: `calc(${(22 + Math.pow(d, 1.3) * 46).toFixed(2)}vh + 45vh)`, transformOrigin: "bottom",
+      bars.push(React.createElement("div", { key: i, "data-bar": "1", style: { flex: 1, alignSelf: "flex-end", transformOrigin: "bottom", transition: "transform 1.1s cubic-bezier(.16,1,.3,1)", height: `calc(${(22 + Math.pow(d, 1.3) * 46).toFixed(2)}vh + 45vh)` } }, React.createElement("div", { style: { height: "100%", transformOrigin: "bottom",
         background: (() => { const X = 22 + Math.pow(d, 1.3) * 46, v = f => (X * f).toFixed(2) + "vh"; return `linear-gradient(to bottom, rgba(0,0,0,0) 0, var(--a1) ${v(.14)}, var(--a2) ${v(.32)}, var(--a3) ${v(.40)}, #ffffff ${v(.46)}, var(--a3) ${v(.52)}, var(--a2) ${v(.62)}, var(--a4) ${v(1)}, var(--a4) 100%)`; })(),
         backgroundSize: "100% 130%",
-        animation: animate ? `rxRise 1.2s cubic-bezier(.2,.7,.2,1) ${(Math.abs(i - mid) * 0.05).toFixed(2)}s both, rxDrift ${6 + (i % 4)}s ease-in-out ${(i * 0.3).toFixed(1)}s infinite` : "none",
-      }}));
+        animation: animate ? `rxRise 1.2s cubic-bezier(.2,.7,.2,1) ${(Math.abs(i - mid) * 0.05).toFixed(2)}s both, rxBreathe ${(5 + (i % 5) * 0.7).toFixed(1)}s ease-in-out ${(1.2 + i * 0.37).toFixed(2)}s infinite, rxDrift ${6 + (i % 4)}s ease-in-out ${(i * 0.3).toFixed(1)}s infinite` : "none",
+      }})));
     }
-    const tags = this.props.marqueeItems ?? ["iOS", "Android", "Web", "Product design", "UX research", "Swift", "Kotlin", "React Native", "App Store launch", "Growth"];
-    const row = (k) => tags.map((t, i) => React.createElement("span", { key: k + i, style: { display: "flex", alignItems: "center", gap: 48, fontSize: 22, color: "#a1a1aa", whiteSpace: "nowrap" } },
-      t, React.createElement("span", { style: { width: 6, height: 6, borderRadius: "50%", background: "var(--a3)" } })));
-    const marquee = React.createElement("div", { style: { display: "flex", gap: 48, width: "max-content", paddingLeft: 48, animation: animate ? "rxMarquee 40s linear infinite" : "none" } }, row("a"), row("b"));
-    
     // ── Apps: add a new app by adding one line here (icon = square image path) ──
     const APPS = this.props.apps ?? [
-      { name: "Macropad", icon: "assets/apps/macropad.png?v=2", url: "#" },
+      { name: "Macropad Studio", icon: "assets/apps/macropad.png?v=2", device: "phone",
+        shots: [       // iPhone screenshots
+          "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/83/76/5e/83765e90-c72f-27b4-088c-de781e5f64a1/6.3in_1206_U00d72622__U2014_1_Main_board@1x.png/460x1022bb.webp",
+          "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/1b/60/57/1b6057dd-7ee9-8e40-8fdb-8b2121b5b1cb/6.3in_1206_U00d72622__U2014_2_Store@1x.png/460x1022bb.webp",
+          "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource221/v4/19/77/b8/1977b87f-de01-897d-765b-82ce72db5887/6.3in_1206_U00d72622__U2014_5_Themes__U0026_Connect@1x.png/460x1022bb.webp",
+          "https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/ad/46/17/ad46174f-5e79-3936-7365-d39ee92789f8/6.3in_1206_U00d72622__U2014_3_Actions@1x.png/460x1022bb.webp",
+        ],
+        macShots: [],  // Mac screenshots
+        rating: "", category: "Utilities", badge: "New Release",
+        desc: "Turn your iPhone into a custom control deck for your Mac. Build keys, knobs and faders, assign any shortcut or macro, and scan a QR code to connect.",
+        desc2: "Knurled knobs, metal and wood surfaces, glowing LEDs and haptic feedback make every press feel mechanical and precise.",
+        desc3: "Nearly 20 component types, ready-made packs for Media, Windows, System, Xcode and Zoom, and themes like Studio, Carbon and Walnut.",
+        desc4: "Built for developers, designers, editors and streamers. If you repeat it on your Mac, Macropad can put it on one key.",
+        desc5: "Free to download, with Pro features in the app. No account, no ads, no tracking, and your boards sync with iCloud.",
+        appStore: "https://apps.apple.com/us/app/macropad-studio/id6822714199",
+        dmg: "https://rexiox.github.io/project/mstudio/Macropad-1.0.dmg",
+        note: "Free · iOS 17+ · macOS 14+ (Helper)" },
     ];
     const hues = [25, 300, 150, 230, 45, 190, 340, 90];
     const items = [...APPS];
-    for (let i = 0; items.length < Math.max(8, APPS.length); i++) items.push({ hue: hues[i % hues.length] });
-    const tile = (it, i, k) => {
-      const on = this.state.hov === k, c = it.icon ? "rgba(255,255,255,0.35)" : `oklch(0.72 0.19 ${it.hue})`;
+    const minN = Math.max(8, Math.ceil((typeof window !== "undefined" ? window.innerWidth : 1600) / this.STEP) + 2);
+    for (let i = 0; items.length < Math.max(minN, APPS.length); i++) items.push({ hue: hues[i % hues.length] });
+    this.itemCount = items.length; this.realMask = items.map(it => !!it.name);
+    const tile = (it, i, k, j) => {
+      const inZone = this.state.zone && i === (this.state.active ?? -1), on = this.state.hov === k || inZone, c = it.icon ? "rgba(255,255,255,0.3)" : `oklch(0.72 0.19 ${it.hue})`;
       const inner = it.icon
         ? React.createElement("img", { src: it.icon, alt: it.name, style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", borderRadius: 29, display: "block" } })
-        : React.createElement("div", { style: { width: 54, height: 54, borderRadius: 15, background: c, boxShadow: "0 0 " + (on ? 44 : 26) + "px " + c, opacity: on ? 1 : 0.88, transition: "box-shadow .45s, opacity .45s" } });
-      return React.createElement(it.url ? "a" : "div", { key: k, href: it.url, title: it.name,
+        : React.createElement("div", { style: { width: 48, height: 48, borderRadius: 14, background: "rgba(255,255,255,0.06)", border: "1px dashed rgba(255,255,255,0.16)" } });
+      return React.createElement("div", { key: k, title: it.name || "Coming soon", onClick: it.name ? () => this.centerTile(j) : undefined,
         onMouseEnter: () => this.setState({ hov: k }), onMouseLeave: () => this.setState({ hov: -1 }),
-        style: { position: "relative", flex: "none", width: 124, height: 124, borderRadius: 30, display: "grid", placeItems: "center", cursor: it.url ? "pointer" : "default", textDecoration: "none",
+        style: { position: "relative", flex: "none", width: 124, height: 124, borderRadius: 30, display: "grid", placeItems: "center", cursor: it.name ? "pointer" : "default", textDecoration: "none",
           background: "linear-gradient(to bottom,#0f0f11,#070708)", border: "1px solid " + (on ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.09)"),
-          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)" + (on ? ", 0 18px 50px -10px " + c : ""),
-          transform: on ? "translateY(-8px)" : "none", transition: "transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s, border-color .45s" } },
+          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.06)", transformOrigin: "50% 50%", transition: "border-color .4s ease" } },
         inner,
-        it.name ? React.createElement("span", { style: { position: "absolute", top: "calc(100% + 12px)", left: "50%", transform: `translateX(-50%) translateY(${on ? 0 : -4}px)`, opacity: on ? 1 : 0,
-          transition: "opacity .3s, transform .3s", fontSize: 14, fontWeight: 600, color: "#f4f4f5", whiteSpace: "nowrap" } }, it.name) : null);
+        React.createElement("span", { style: { position: "absolute", top: "calc(100% + 14px)", left: "50%", transform: `translateX(-50%) translateY(${on ? 0 : -4}px)`, opacity: on ? 1 : 0,
+          transition: "opacity .3s, transform .3s", fontSize: 14, fontWeight: 600, color: it.name ? "#f4f4f5" : "#71717a", whiteSpace: "nowrap" } }, it.name || "Coming soon"));
     };
-    const set = (k) => items.map((it, i) => tile(it, i, k + i));
-    const appMarquee = React.createElement("div", {
-      onMouseEnter: () => this.setState({ paused: true }), onMouseLeave: () => this.setState({ paused: false, hov: -1 }),
-      style: { display: "flex", gap: 36, width: "max-content", padding: "16px 0 40px", animation: animate ? "rxMarquee 36s linear infinite" : "none", animationPlayState: this.state.paused ? "paused" : "running" } },
-      ...set("a"), ...set("b").map((el, i) => React.cloneElement(el, { key: "b" + i })));
+    const all = [...items, ...items].map((it, j) => tile(it, j % items.length, "t" + j, j));
+    const appMarquee = React.createElement("div", { ref: this.trackRef,
+      onMouseEnter: () => { this.hoverPause = true; }, onMouseLeave: () => { this.hoverPause = false; this.setState({ hov: -1 }); },
+      style: { display: "flex", gap: this.STEP - 124, width: "max-content", padding: "16px 0 44px", willChange: "transform" } }, all);
     const text = this.props.aboutText ?? "Rexiox is an independent studio that designs, builds and grows its own apps. We work in small teams, ship often, and care about every detail people touch.";
     const ws = text.split(/\s+/), p = this.state.p;
-    const words = ws.map((t, i) => ({ t, o: (i / ws.length) < p ? 1 : 0.18 }));
+    const words = ws.map((t, i) => ({ t, o: (0.16 + 0.84 * Math.min(1, Math.max(0, p * (ws.length + 3) - i) / 3)).toFixed(3) }));
     const bh = this.state.bh, letters = "Rexiox".split("");
     const ease = "cubic-bezier(.65,0,.25,1)";
     const brand = React.createElement("span", {
@@ -201,11 +514,35 @@ class Component extends DCLogic {
               transform: bh ? "translateY(-50%)" : "translateY(0)", transition: `transform .55s ${ease} ${(i * 0.035).toFixed(3)}s` } },
             React.createElement("span", null, l),
             React.createElement("span", { style: { color: "var(--a3)" } }, l))))));
+    const E = React.createElement, an = (v) => animate ? v : "none";
+    const ring = (s, c) => E("div", { style: { position: "absolute", width: s, height: s, borderRadius: "50%", border: "1px solid " + c } });
+    const visConsult = E("div", { style: { position: "relative", width: 52, height: 52, display: "grid", placeItems: "center" } },
+      ring(52, "rgba(255,255,255,0.10)"), ring(34, "rgba(255,255,255,0.16)"),
+      E("div", { style: { position: "absolute", width: 10, height: 10, borderRadius: "50%", background: "#f4f4f5" } }),
+      E("div", { style: { position: "absolute", inset: 0, animation: an("rxSpin 7s linear infinite") } }, E("div", { style: { position: "absolute", top: -3, left: "50%", marginLeft: -3, width: 6, height: 6, borderRadius: "50%", background: "var(--a3)" } })),
+      E("div", { style: { position: "absolute", width: 34, height: 34, left: 9, top: 9, animation: an("rxSpin 4.5s linear infinite reverse") } }, E("div", { style: { position: "absolute", bottom: -2.5, left: "50%", marginLeft: -2.5, width: 5, height: 5, borderRadius: "50%", background: "rgba(255,255,255,0.7)" } })));
+    const line = (w, c, d) => E("div", { style: { height: 4, width: w, borderRadius: 2, background: c, transformOrigin: "left", animation: an(`rxType 3.6s cubic-bezier(.65,0,.25,1) ${d}s infinite`) } });
+    const visDev = E("div", { style: { display: "flex", flexDirection: "column", gap: 6, width: 44 } },
+      line(30, "rgba(255,255,255,0.55)", 0), E("div", { style: { display: "flex", gap: 6, paddingLeft: 8 } }, line(14, "var(--a3)", 0.25), line(18, "rgba(255,255,255,0.3)", 0.35)),
+      line(36, "rgba(255,255,255,0.3)", 0.5),
+      E("div", { style: { display: "flex", alignItems: "center", gap: 4 } }, line(20, "rgba(255,255,255,0.55)", 0.7), E("div", { style: { width: 2, height: 10, background: "#f4f4f5", animation: an("rxBlink 1s steps(1) infinite") } })));
+    const cur = items[Math.min(this.state.active ?? 0, items.length - 1)] || {};
     return {
+      cur, isReal: !!cur.name, isEmpty: !cur.name, shotLabel: cur.name ? cur.name + " screenshot" : "Coming soon", ...this.slideVals(cur), shotImgOld: cur.shot ? React.createElement("img", { src: cur.shot, alt: cur.name, style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" } }) : null,
+      iconImg: cur.icon ? React.createElement("img", { src: cur.icon, alt: "", style: { width: 60, height: 60, borderRadius: 15, display: "block", flex: "none" } }) : null,
+      isMac: (cur.device || "phone") === "mac", isPhone: (cur.device || "phone") === "phone", isTablet: cur.device === "tablet", isDual: cur.device === "dual", panelOpacity: (this.state.fading || !this.state.open) ? 0 : 1, panelShift: (this.state.fading || !this.state.open) ? 18 : 0,
+      panelRows: this.state.open ? "1fr" : "0fr",
+      zoneDot: this.state.zone ? 0.9 : 0.2,
+      visConsult, visDev,
+      heroTitle: (() => { const ws = "We turn bold ideas into apps people use every day, everywhere.".split(" "), hi = 8;
+        const base = "linear-gradient(to bottom,#ffffff 35%,#8b8b90)", acc = "linear-gradient(to bottom,#ffffff 10%,var(--a3) 70%)";
+        return ws.map((w, i) => React.createElement(React.Fragment, { key: i }, React.createElement("span", { style: i >= hi ? { display: "inline-block", filter: "drop-shadow(0 2px 14px rgba(0,0,0,0.75))" } : { display: "inline-block" } }, React.createElement("span", { "aria-hidden": "true", style: { display: "inline-block", background: i >= hi ? acc : base, WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", paddingBottom: "0.08em", 
+          animation: animate ? `rxWordIn .9s cubic-bezier(.16,1,.3,1) ${(0.3 + i * 0.07).toFixed(2)}s both` : "none" } }, w)), i < ws.length - 1 ? " " : null)); })(),
+      scrollDot: React.createElement("div", { style: { position: "absolute", left: 0, top: 0, width: 1, height: 14, background: "#f4f4f5", animation: animate ? "rxScrollDot 2.2s cubic-bezier(.65,0,.35,1) infinite" : "none" } }),
       brand,
       appMarquee, iconRowRef: this.iconRowRef,
       bars: React.createElement("div", { style: { position: "absolute", inset: 0, display: "flex", alignItems: "flex-end" } }, bars),
-      words, aboutRef: this.aboutRef,
+      words, aboutRef: this.aboutRef, aboutGlow: (0.04 + this.state.p * 0.14).toFixed(3),
     };
   }
 }
