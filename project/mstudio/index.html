@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Macropad — Your iPhone as a macro pad for your Mac</title>
+  <meta name="description" content="Macropad turns your iPhone into a customizable macro pad for your Mac. Get the iOS app on the App Store and the free Macropad Helper for macOS.">
+  <style>
+    :root {
+      --bg: #f5f5f7;
+      --surface: #ffffff;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --border: #d2d2d7;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --dark-btn: #1d1d1f;
+      --dark-btn-text: #ffffff;
+      --radius: 18px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #000000;
+        --surface: #1c1c1e;
+        --text: #f5f5f7;
+        --muted: #a1a1a6;
+        --border: #38383a;
+        --accent: #2997ff;
+        --accent-hover: #4aa8ff;
+        --dark-btn: #f5f5f7;
+        --dark-btn-text: #1d1d1f;
+      }
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+    /* Header */
+    header {
+      position: sticky; top: 0; z-index: 10;
+      background: color-mix(in srgb, var(--bg) 80%, transparent);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 52px; }
+    .brand { font-weight: 600; font-size: 17px; color: var(--text); }
+    .brand:hover { text-decoration: none; }
+    .nav-links { display: flex; gap: 22px; font-size: 14px; }
+    .nav-links a { color: var(--muted); }
+    .nav-links a:hover { color: var(--text); text-decoration: none; }
+
+    /* Hero */
+    .hero { text-align: center; padding: 88px 0 64px; }
+    .app-icon {
+      width: 96px; height: 96px; margin: 0 auto 28px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #5e5ce6, #0a84ff);
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; padding: 16px;
+      box-shadow: 0 10px 30px rgba(10, 132, 255, .3);
+    }
+    .app-icon span { background: rgba(255,255,255,.9); border-radius: 5px; }
+    .app-icon span:nth-child(5) { background: #ffd60a; }
+    h1 {
+      font-size: clamp(36px, 6vw, 56px); line-height: 1.07; letter-spacing: -0.02em;
+      margin: 0 0 16px; font-weight: 700;
+    }
+    .lead { font-size: clamp(18px, 2.4vw, 21px); color: var(--muted); max-width: 640px; margin: 0 auto 36px; }
+
+    .cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 12px 22px; border-radius: 14px; min-width: 230px;
+      font-size: 17px; font-weight: 600; text-align: left;
+      transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+    .btn:hover { text-decoration: none; transform: translateY(-1px); }
+    .btn svg { width: 26px; height: 26px; flex: none; }
+    .btn small { display: block; font-size: 12px; font-weight: 500; opacity: .75; line-height: 1.2; }
+    .btn-ios { background: var(--dark-btn); color: var(--dark-btn-text); }
+    .btn-mac { background: var(--accent); color: #fff; }
+    .btn-mac:hover { background: var(--accent-hover); }
+    .btn.recommended { box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 35%, transparent); }
+    .fine { margin-top: 18px; font-size: 13px; color: var(--muted); }
+    .note {
+      margin: 22px auto 0; max-width: 520px; font-size: 14px; color: var(--muted);
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 16px;
+      display: none;
+    }
+    .note.show { display: block; }
+
+    /* Sections */
+    section { padding: 56px 0; }
+    h2 { font-size: clamp(28px, 4vw, 36px); letter-spacing: -0.015em; margin: 0 0 28px; text-align: center; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px;
+    }
+    .card h3 { margin: 0 0 8px; font-size: 19px; }
+    .card p { margin: 0; color: var(--muted); font-size: 15px; }
+    .step-label { font-size: 12px; font-weight: 700; letter-spacing: .08em; color: var(--accent); margin-bottom: 8px; }
+
+    .platforms { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .platform { text-align: center; padding: 32px 24px; }
+    .platform svg { width: 44px; height: 44px; color: var(--accent); margin-bottom: 12px; }
+    .platform h3 { font-size: 22px; }
+    .platform p { margin-bottom: 20px; }
+    .platform .btn { min-width: 0; justify-content: center; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border); padding: 28px 0 40px; font-size: 13px; color: var(--muted); }
+    footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    footer a { color: var(--muted); }
+
+    @media (max-width: 560px) {
+      .nav-links { gap: 14px; font-size: 13px; }
+      .hero { padding: 60px 0 44px; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="index.html">Macropad</a>
+    <nav class="nav-links">
+      <a href="download.html">Download</a>
+      <a href="support.html">Support</a>
+      <a href="privacy-policy.html">Privacy</a>
+      <a href="terms-of-use.html">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="app-icon" aria-hidden="true">
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+      <span></span><span></span><span></span>
+    </div>
+    <h1>Your iPhone.<br>Your Mac's macro pad.</h1>
+    <p class="lead">Trigger shortcuts, launch apps and manage windows on your Mac with one tap. Get Macropad for iPhone, then install the free Helper on your Mac.</p>
+
+    <div class="cta">
+      <a class="btn btn-ios" id="btn-ios" href="https://apps.apple.com/us/app/macropad-studio/id6822714199" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
+        <span><small>Download on the</small>App Store</span>
+      </a>
+      <a class="btn btn-mac" id="btn-mac" href="Macropad-1.0.dmg" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg>
+        <span><small>Download for</small>macOS</span>
+      </a>
+    </div>
+    <p class="fine">iPhone app on the App Store · Mac Helper free · macOS 14 or later</p>
+    <p class="note" id="device-note"></p>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <h2>How it works</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="step-label">STEP 1</div>
+          <h3>Get the iPhone app</h3>
+          <p>Download Macropad from the App Store on your iPhone or iPad.</p>
+        </div>
+        <div class="card">
+          <div class="step-label">STEP 2</div>
+          <h3>Install the Mac Helper</h3>
+          <p>Download Macropad Helper on your Mac and move it to Applications.</p>
+        </div>
+        <div class="card">
+          <div class="step-label">STEP 3</div>
+          <h3>Allow Accessibility</h3>
+          <p>Enable the Helper in System Settings → Privacy &amp; Security → Accessibility.</p>
+        </div>
+        <div class="card">
+          <div class="step-label">STEP 4</div>
+          <h3>Pair and press</h3>
+          <p>Scan the QR code shown by the Helper with your iPhone. That's it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Get Macropad</h2>
+      <div class="platforms">
+        <div class="card platform">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>
+          <h3>iPhone &amp; iPad</h3>
+          <p>The controller. Build your own pads and buttons.</p>
+          <a class="btn btn-ios" href="https://apps.apple.com/us/app/macropad-studio/id6822714199" target="_blank" rel="noopener">View on the App Store</a>
+        </div>
+        <div class="card platform">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg>
+          <h3>Mac</h3>
+          <p>The Helper. Free, lightweight, lives in your menu bar.</p>
+          <a class="btn btn-mac" href="Macropad-1.0.dmg" download>Download for macOS</a>
+        </div>
+      </div>
+      <p class="fine" style="text-align:center">Need help installing? See the <a href="download.html">download guide</a> or <a href="support.html">Support</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Rexiox. Macropad is not affiliated with Apple Inc.</span>
+    <span>
+      <a href="download.html">Download</a> ·
+      <a href="support.html">Support</a> ·
+      <a href="privacy-policy.html">Privacy</a> ·
+      <a href="terms-of-use.html">Terms</a>
+    </span>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var ua = navigator.userAgent || "";
+    var isIPad = /iPad/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    var isIOS = /iPhone|iPod/.test(ua) || isIPad;
+    var isMac = !isIOS && /Macintosh|Mac OS X/.test(ua);
+    var note = document.getElementById("device-note");
+
+    if (isIOS) {
+      document.getElementById("btn-ios").classList.add("recommended");
+      note.innerHTML = "You're on your iPhone or iPad. Get the app here, then open this page <strong>on your Mac</strong> to download the Helper.";
+      note.classList.add("show");
+    } else if (isMac) {
+      document.getElementById("btn-mac").classList.add("recommended");
+    }
+  })();
+</script>
+</body>
+</html>
