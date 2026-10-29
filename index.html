@@ -257,7 +257,18 @@ a{color:#f4f4f5}a:hover{color:#fff}
     <div data-reveal="0.1" data-reveal-y="120" style="font-size:clamp(80px,19vw,280px);font-weight:600;letter-spacing:-0.07em;line-height:0.8;background:linear-gradient(to bottom,#2a2a2e,#050505);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none">rexiox</div>
     <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:#71717a">
       <span>© 2026 Rexiox. All rights reserved.</span>
-      <span>Privacy · Terms</span>
+      <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px">
+        <div style="display:flex;align-items:center;gap:10px">
+        <div role="radiogroup" aria-label="Color theme" style="display:flex;align-items:center;gap:8px;overflow:hidden;max-width:{{ palW }};opacity:{{ palO }};padding:4px;margin:-4px;transition:max-width .5s cubic-bezier(.16,1,.3,1),opacity .35s ease">
+          <sc-for list="{{ swatches }}" as="s" hint-placeholder-count="0"><button type="button" role="radio" aria-checked="{{ s.on }}" aria-label="{{ s.name }}" title="{{ s.name }}" onClick="{{ s.pick }}" style="width:14px;height:14px;padding:0;border-radius:50%;cursor:pointer;background:{{ s.c }};border:none;box-shadow:{{ s.ring }};transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s" style-hover="transform:scale(1.2)"></button></sc-for>
+        </div>
+        <button type="button" onClick="{{ togglePal }}" aria-label="Color theme" aria-expanded="{{ palExp }}" title="Color theme" style="flex:none;width:28px;height:28px;padding:0;border-radius:999px;border:1px solid rgba(255,255,255,0.12);background:transparent;cursor:pointer;display:grid;place-items:center;transition:border-color .25s" style-hover="border-color:rgba(255,255,255,0.3)">
+          <span style="width:12px;height:12px;border-radius:50%;background:conic-gradient(from 200deg,var(--a3),var(--a2),var(--a4),var(--a3))"></span>
+        </button>
+        </div>
+        <span style="width:1px;height:14px;background:rgba(255,255,255,0.12)"></span>
+        <span>Privacy · Terms</span>
+      </div>
     </div>
   </div>
 </footer>
@@ -286,8 +297,9 @@ class Component extends DCLogic {
     gold:   ["#2e2004", "#c48a12", "#f2cc6a", "#1e1502"],
     cyan:   ["#022a33", "#0ea5c4", "#67e3f5", "#021c24"],
   };
+  curPal() { return this.state.userPal || this.props.palette || "white"; }
   applyPalette() {
-    const p = this.palettes[this.props.palette ?? "white"] || this.palettes.red;
+    const p = this.palettes[this.curPal()] || this.palettes.red;
     ["--a1", "--a2", "--a3", "--a4"].forEach((k, i) => document.body.style.setProperty(k, p[i]));
   }
   motionOK() { return (this.props.animate ?? true) && !window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
@@ -485,8 +497,8 @@ class Component extends DCLogic {
     window.addEventListener("scroll", this.onTop, { passive: true });
   }
   componentWillUnmount() { window.removeEventListener("resize", this.onVh); this.teardown(); cancelAnimationFrame(this.tr); clearTimeout(this.ft); document.removeEventListener("click", this.onLink); window.removeEventListener("hashchange", this.onHash); window.removeEventListener("scroll", this.onTop); this.spyIO && this.spyIO.disconnect(); }
-  componentDidMount() { this.onVh = () => this.setState({ vh: window.innerHeight }); window.addEventListener("resize", this.onVh); this.applyPalette(); this.setupMotion(); this.setupLinks(); this.tr = requestAnimationFrame(this.tick); }
-  componentDidUpdate(pp) { this.applyPalette(); if (pp.animate !== this.props.animate) { this.teardown(); this.setupMotion(); } }
+  componentDidMount() { try { const sp = localStorage.getItem("rexiox-palette"); if (sp && this.palettes[sp]) this.setState({ userPal: sp }); } catch (e) {} this.onVh = () => this.setState({ vh: window.innerHeight }); window.addEventListener("resize", this.onVh); this.applyPalette(); this.setupMotion(); this.setupLinks(); this.tr = requestAnimationFrame(this.tick); }
+  componentDidUpdate(pp) { if (pp.palette !== this.props.palette && this.state.userPal) { try { localStorage.removeItem("rexiox-palette"); } catch (e) {} this.setState({ userPal: null }); } this.applyPalette(); if (pp.animate !== this.props.animate) { this.teardown(); this.setupMotion(); } }
   teardown() { clearTimeout(this.fb); this.io && this.io.disconnect(); (this.off || []).forEach(f => f()); if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0; }
 
   renderVals() {
@@ -583,6 +595,12 @@ class Component extends DCLogic {
       panelRows: this.state.open ? "1fr" : "0fr",
       zoneDot: this.state.zone ? 0.9 : 0.2,
       visConsult, visDev,
+      palW: this.state.palOpen ? "260px" : "0px", palO: this.state.palOpen ? 1 : 0, palExp: this.state.palOpen ? "true" : "false",
+      togglePal: () => this.setState(s => ({ palOpen: !s.palOpen })),
+      swatches: ["white", "pureRed", "red", "crimson", "rose", "orange", "violet", "blue", "cyan"].filter(k => this.palettes[k]).map(k => { const on = k === this.curPal();
+        return { name: k === "pureRed" ? "Red" : k === "red" ? "Coral" : k[0].toUpperCase() + k.slice(1), on: on ? "true" : "false", c: this.palettes[k][2],
+          ring: on ? "0 0 0 2px #050505, 0 0 0 3.5px rgba(255,255,255,0.85)" : "0 0 0 1px rgba(255,255,255,0.12)",
+          pick: () => { try { localStorage.setItem("rexiox-palette", k); } catch (e) {} this.setState({ userPal: k }); } }; }),
       barGlow: React.createElement("div", { "aria-hidden": "true", style: { position: "absolute", left: "50%", top: "62vh", width: "110vw", height: "38vh", borderRadius: "50%", pointerEvents: "none",
         background: "radial-gradient(ellipse at center, color-mix(in srgb, var(--a3) 40%, transparent), color-mix(in srgb, var(--a3) 12%, transparent) 40%, transparent 70%)", transform: "translateX(-50%)", willChange: "opacity, transform",
         animation: animate ? "rxGlow 6s ease-in-out 1.5s infinite" : "none", opacity: 0.4 } }),
