@@ -12,7 +12,7 @@
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="apple-touch-icon" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
 <style>
 html{scroll-behavior:smooth}
 body{margin:0;background:#050505;color:#f4f4f5;font-family:"Geist",system-ui,sans-serif;-webkit-font-smoothing:antialiased;--a1:#3a0a04;--a2:#c2240d;--a3:#ff5a3c;--a4:#2a0602}
@@ -21,6 +21,7 @@ a{color:#f4f4f5}a:hover{color:#fff}
 @keyframes rxDrift{0%{background-position:0 0%}50%{background-position:0 18%}100%{background-position:0 0%}}
 @keyframes rxRise{from{transform:scaleY(0.6);opacity:0}to{transform:scaleY(1);opacity:1}}
 @keyframes rxLogoIn{0%{opacity:0;transform:rotate(-120deg) scale(.3);filter:blur(6px)}70%{opacity:1;transform:rotate(8deg) scale(1.06);filter:blur(0)}100%{opacity:1;transform:none}}
+@keyframes rxBrandIn{0%{opacity:0;transform:translateY(105%) skewY(12deg);filter:blur(8px);color:var(--a3)}55%{opacity:1;filter:blur(0);color:var(--a3)}100%{opacity:1;transform:none;filter:blur(0);color:#f4f4f5}}
 @keyframes rxLetterIn{from{opacity:0;transform:translateY(70%);filter:blur(6px)}to{opacity:1;transform:none;filter:blur(0)}}
 @keyframes rxHeaderIn{from{opacity:0;transform:translate(-50%,-24px)}to{opacity:1;transform:translate(-50%,0)}}
 @keyframes rxWordIn{from{opacity:0;transform:translateY(0.35em);filter:blur(10px)}to{opacity:1;transform:none;filter:blur(0)}}
@@ -53,10 +54,10 @@ a{color:#f4f4f5}a:hover{color:#fff}
     </nav>
   </header>
 
-  <sc-if value="{{ showScroll }}" hint-placeholder-val="{{ true }}"><div data-reveal="1.4" style="position:absolute;left:50%;bottom:min(28px,3vh);margin-left:-30px;width:60px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none">
+  <sc-if value="{{ showScroll }}" hint-placeholder-val="{{ true }}"><div data-reveal="1.4" style="position:absolute;left:50%;bottom:min(28px,3vh);margin-left:-30px;width:60px;z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none"><div data-scroll-cue="1" style="display:flex;flex-direction:column;align-items:center;gap:10px;transition:opacity .8s ease">
     <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#f4f4f5;mix-blend-mode:difference">Scroll</span>
     <div style="position:relative;width:1px;height:40px;overflow:hidden;background:rgba(255,255,255,0.3);mix-blend-mode:difference">{{ scrollDot }}</div>
-  </div></sc-if>
+  </div></div></sc-if>
   <div data-hero-content="1" style="position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:min(28px,3.6vh);will-change:transform,opacity;text-align:center;padding:clamp(96px,14vh,120px) 20px clamp(48px,10vh,110px)">
     <div aria-hidden="true" style="position:absolute;left:50%;top:50%;width:min(1100px,120vw);height:min(760px,110vh);transform:translate(-50%,-50%);background:radial-gradient(ellipse at center,rgba(5,5,5,0.82) 0%,rgba(5,5,5,0.6) 40%,rgba(5,5,5,0) 70%);pointer-events:none;z-index:-1"></div>
     <a href="#apps" data-reveal="0.2" style="display:flex;align-items:center;gap:10px;padding:5px 6px 5px 14px;border-radius:999px;border:1px solid rgba(255,255,255,0.12);font-size:13px;color:#d4d4d8;background:rgba(5,5,5,0.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-decoration:none;transition:border-color .3s" style-hover="border-color:rgba(255,255,255,0.28);color:#d4d4d8">
@@ -91,7 +92,7 @@ a{color:#f4f4f5}a:hover{color:#fff}
     <h2 data-reveal="0.1" style="margin:0;font-weight:600;font-size:clamp(38px,5vw,68px);line-height:1;letter-spacing:-0.05em;max-width:12ch;text-wrap:balance;background:linear-gradient(to bottom,#ffffff 35%,#8b8b90);-webkit-background-clip:text;background-clip:text;color:transparent">Apps people open every day</h2>
     <p data-reveal="0.2" style="margin:0;max-width:40ch;font-size:17px;line-height:1.5;color:#a1a1aa">Every app is designed, built and run by our own team.</p>
   </div>
-  <div ref="{{ iconRowRef }}" data-reveal="0.3" style="position:relative;margin:clamp(8px,2vw,32px) calc(-1 * clamp(12px,2vw,24px)) clamp(8px,2vw,32px);padding:48px 0 40px;overflow:hidden">
+  <div ref="{{ iconRowRef }}" data-reveal="0.3" style="position:relative;margin:clamp(8px,2vw,32px) calc(-1 * clamp(12px,2vw,24px)) clamp(32px,5vw,80px);padding:48px 0 40px;overflow:hidden">
     {{ appMarquee }}
     <div style="position:absolute;top:0;bottom:0;left:0;width:clamp(80px,24vw,340px);background:linear-gradient(to right,#050505 18%,rgba(5,5,5,0.85) 45%,rgba(5,5,5,0));pointer-events:none;z-index:3"></div>
     <div style="position:absolute;top:0;bottom:0;right:0;width:clamp(80px,24vw,340px);background:linear-gradient(to left,#050505 18%,rgba(5,5,5,0.85) 45%,rgba(5,5,5,0));pointer-events:none;z-index:3"></div>
@@ -134,7 +135,8 @@ a{color:#f4f4f5}a:hover{color:#fff}
       </sc-if>
       </div>
     </div>
-    <div style="flex:1 1 360px;max-width:480px;max-height:clamp(440px,48vw,640px);min-height:clamp(440px,48vw,640px);justify-content:center;display:flex;flex-direction:column;align-items:flex-start;gap:10px;opacity:{{ panelOpacity }};transform:translateY({{ panelShift }}px);transition:opacity .45s ease .06s,transform .6s cubic-bezier(.16,1,.3,1) .06s">
+    <div style="position:relative;isolation:isolate;flex:1 1 360px;max-width:480px;max-height:{{ colMaxH }};min-height:clamp(440px,48vw,640px);justify-content:{{ colJustify }};display:flex;flex-direction:column;align-items:flex-start;gap:10px;opacity:{{ panelOpacity }};transform:translateY({{ panelShift }}px);transition:opacity .45s ease .06s,transform .6s cubic-bezier(.16,1,.3,1) .06s">
+      {{ headerVideo }}
       <sc-if value="{{ isReal }}" hint-placeholder-val="{{ true }}">
       <div style="display:flex;flex-direction:column;align-items:flex-start;gap:10px">
         
@@ -258,9 +260,9 @@ a{color:#f4f4f5}a:hover{color:#fff}
     <div style="display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;font-size:14px;color:#71717a">
       <span>© 2026 Rexiox. All rights reserved.</span>
       <div style="display:flex;flex-wrap:wrap;align-items:center;gap:20px">
-        <div style="display:flex;align-items:center;gap:10px">
-        <div role="radiogroup" aria-label="Color theme" style="display:flex;align-items:center;gap:8px;overflow:hidden;max-width:{{ palW }};opacity:{{ palO }};padding:4px;margin:-4px;transition:max-width .5s cubic-bezier(.16,1,.3,1),opacity .35s ease">
-          <sc-for list="{{ swatches }}" as="s" hint-placeholder-count="0"><button type="button" role="radio" aria-checked="{{ s.on }}" aria-label="{{ s.name }}" title="{{ s.name }}" onClick="{{ s.pick }}" style="width:14px;height:14px;padding:0;border-radius:50%;cursor:pointer;background:{{ s.c }};border:none;box-shadow:{{ s.ring }};transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s" style-hover="transform:scale(1.2)"></button></sc-for>
+        <div style="display:flex;align-items:center">
+        <div role="radiogroup" aria-label="Color theme" aria-hidden="{{ palHidden }}" style="display:flex;align-items:center;gap:8px;overflow:hidden;max-width:{{ palW }};opacity:{{ palO }};visibility:{{ palVis }};padding:4px {{ palPad }} 4px 4px;margin:-4px 0 -4px -4px;transition:max-width .5s cubic-bezier(.16,1,.3,1),opacity .35s ease,padding .5s cubic-bezier(.16,1,.3,1),visibility 0s linear {{ palVisDelay }}">
+          <sc-for list="{{ swatches }}" as="s" hint-placeholder-count="0"><button type="button" role="radio" tabIndex="{{ s.tab }}" aria-checked="{{ s.on }}" aria-label="{{ s.name }}" title="{{ s.name }}" onClick="{{ s.pick }}" style="width:14px;height:14px;padding:0;border-radius:50%;cursor:pointer;background:{{ s.c }};border:none;box-shadow:{{ s.ring }};transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s" style-hover="transform:scale(1.2)"></button></sc-for>
         </div>
         <button type="button" onClick="{{ togglePal }}" aria-label="Color theme" aria-expanded="{{ palExp }}" title="Color theme" style="flex:none;width:28px;height:28px;padding:0;border-radius:999px;border:1px solid rgba(255,255,255,0.12);background:transparent;cursor:pointer;display:grid;place-items:center;transition:border-color .25s" style-hover="border-color:rgba(255,255,255,0.3)">
           <span style="width:12px;height:12px;border-radius:50%;background:conic-gradient(from 200deg,var(--a3),var(--a2),var(--a4),var(--a3))"></span>
@@ -274,7 +276,7 @@ a{color:#f4f4f5}a:hover{color:#fff}
 </footer>
 </div>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;red&quot;,&quot;pureRed&quot;,&quot;crimson&quot;,&quot;ember&quot;,&quot;rose&quot;,&quot;magma&quot;,&quot;sunset&quot;,&quot;violet&quot;,&quot;blue&quot;,&quot;white&quot;,&quot;gray&quot;,&quot;orange&quot;,&quot;green&quot;,&quot;pink&quot;,&quot;gold&quot;,&quot;cyan&quot;],&quot;default&quot;:&quot;red&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;aboutText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Rexiox is an independent studio that designs, builds and grows its own apps. We work in small teams, ship often, and care about every detail people touch.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;barCount&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:9,&quot;max&quot;:31,&quot;step&quot;:2,&quot;default&quot;:17,&quot;tsType&quot;:&quot;number&quot;},&quot;animate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;holdSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:2,&quot;max&quot;:20,&quot;step&quot;:1,&quot;default&quot;:20,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;palette&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;red&quot;,&quot;pureRed&quot;,&quot;crimson&quot;,&quot;ember&quot;,&quot;rose&quot;,&quot;magma&quot;,&quot;sunset&quot;,&quot;violet&quot;,&quot;blue&quot;,&quot;white&quot;,&quot;gray&quot;,&quot;orange&quot;,&quot;green&quot;,&quot;pink&quot;,&quot;gold&quot;,&quot;cyan&quot;],&quot;default&quot;:&quot;pureRed&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showBrandText&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;showHeaderVideo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;aboutText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Rexiox is an independent studio that designs, builds and grows its own apps. We work in small teams, ship often, and care about every detail people touch.&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;barCount&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:9,&quot;max&quot;:31,&quot;step&quot;:2,&quot;default&quot;:17,&quot;tsType&quot;:&quot;number&quot;},&quot;animate&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;holdSeconds&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:2,&quot;max&quot;:20,&quot;step&quot;:1,&quot;default&quot;:20,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;}}">
 class Component extends DCLogic {
   state = { p: 0, hov: -1, paused: false, bh: false, bk: 0 };
   iconRowRef = React.createRef();
@@ -297,7 +299,7 @@ class Component extends DCLogic {
     gold:   ["#2e2004", "#c48a12", "#f2cc6a", "#1e1502"],
     cyan:   ["#022a33", "#0ea5c4", "#67e3f5", "#021c24"],
   };
-  curPal() { return this.state.userPal || this.props.palette || "white"; }
+  curPal() { return this.state.userPal || this.props.palette || "pureRed"; }
   applyPalette() {
     const p = this.palettes[this.curPal()] || this.palettes.red;
     ["--a1", "--a2", "--a3", "--a4"].forEach((k, i) => document.body.style.setProperty(k, p[i]));
@@ -309,6 +311,8 @@ class Component extends DCLogic {
       this.raf = 0;
       const y = window.scrollY, vh = window.innerHeight, m = this.motionOK();
       const el = this.aboutRef.current;
+      const cue = document.querySelector('[data-scroll-cue]');
+      if (cue) cue.style.opacity = y > vh * 0.12 ? "0" : "1";
       if (el) {
         const r = el.getBoundingClientRect();
         const p = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (r.height * 0.9)));
@@ -497,7 +501,20 @@ class Component extends DCLogic {
     window.addEventListener("scroll", this.onTop, { passive: true });
   }
   componentWillUnmount() { window.removeEventListener("resize", this.onVh); this.teardown(); cancelAnimationFrame(this.tr); clearTimeout(this.ft); document.removeEventListener("click", this.onLink); window.removeEventListener("hashchange", this.onHash); window.removeEventListener("scroll", this.onTop); this.spyIO && this.spyIO.disconnect(); }
-  componentDidMount() { try { const sp = localStorage.getItem("rexiox-palette"); if (sp && this.palettes[sp]) this.setState({ userPal: sp }); } catch (e) {} this.onVh = () => this.setState({ vh: window.innerHeight }); window.addEventListener("resize", this.onVh); this.applyPalette(); this.setupMotion(); this.setupLinks(); this.tr = requestAnimationFrame(this.tick); }
+  brandScramble() {
+    if (!this.motionOK()) return;
+    const word = "Rexiox", glyphs = "XROKAZ#%/<>01", els = document.querySelectorAll("[data-brand-l]");
+    const t0 = performance.now();
+    const step = (t) => {
+      let done = true;
+      els.forEach(el => { const i = +el.dataset.brandL, s = 450 + i * 70, e = s + 520 + i * 60, dt = t - t0;
+        if (dt < e) { done = false; if (dt >= s - 120) { const k = Math.floor(dt / 55); el.textContent = glyphs[(k * 7 + i * 3) % glyphs.length]; } }
+        else if (el.textContent !== word[i]) el.textContent = word[i]; });
+      if (!done) this.bsr = requestAnimationFrame(step);
+    };
+    this.bsr = requestAnimationFrame(step);
+  }
+  componentDidMount() { setTimeout(() => this.brandScramble(), 0); try { const sp = localStorage.getItem("rexiox-palette"); if (sp && this.palettes[sp]) this.setState({ userPal: sp }); } catch (e) {} this.onVh = () => this.setState({ vh: window.innerHeight }); window.addEventListener("resize", this.onVh); this.applyPalette(); this.setupMotion(); this.setupLinks(); this.tr = requestAnimationFrame(this.tick); }
   componentDidUpdate(pp) { if (pp.palette !== this.props.palette && this.state.userPal) { try { localStorage.removeItem("rexiox-palette"); } catch (e) {} this.setState({ userPal: null }); } this.applyPalette(); if (pp.animate !== this.props.animate) { this.teardown(); this.setupMotion(); } }
   teardown() { clearTimeout(this.fb); this.io && this.io.disconnect(); (this.off || []).forEach(f => f()); if (this.raf) cancelAnimationFrame(this.raf); this.raf = 0; }
 
@@ -527,9 +544,9 @@ class Component extends DCLogic {
         rating: "", category: "Utilities", badge: "New Release",
         desc: "Turn your iPhone into a custom control deck for your Mac. Build keys, knobs and faders, assign any shortcut or macro, and scan a QR code to connect.",
         desc2: "Knurled knobs, metal and wood surfaces, glowing LEDs and haptic feedback make every press feel mechanical and precise.",
-        desc3: "Nearly 20 component types, ready-made packs for Media, Windows, System, Xcode and Zoom, and themes like Studio, Carbon and Walnut.",
         desc4: "Built for developers, designers, editors and streamers. If you repeat it on your Mac, Macropad can put it on one key.",
         desc5: "Free to download, with Pro features in the app. No account, no ads, no tracking, and your boards sync with iCloud.",
+        header: "https://rexiox.github.io/assets/macropad/Macropad-Header-3840x1646-30fps.mp4",  // optional header video (wide, App Store style)
         appStore: "https://apps.apple.com/us/app/macropad-studio/id6822714199",
         dmg: "https://rexiox.github.io/project/mstudio/Macropad-1.0.dmg",
         note: "Free · iOS 17+ · macOS 14+ (Helper)" },
@@ -568,12 +585,12 @@ class Component extends DCLogic {
       style: { display: "flex", alignItems: "center", gap: 10 } },
       React.createElement("img", { src: "assets/logo-glyph.png", alt: "", style: { height: 22, width: "auto", display: "block",
         animation: "rxLogoIn 1.1s cubic-bezier(.2,.7,.2,1) .1s both" } }),
-      React.createElement("span", { style: { display: "flex", fontSize: 20, fontWeight: 600, letterSpacing: "-0.03em", lineHeight: 1.15, color: "#f4f4f5" } },
+      (this.props.showBrandText ?? true) && React.createElement("span", { style: { display: "flex", fontFamily: "'Space Grotesk',sans-serif", textTransform: "uppercase", fontSize: 20, fontWeight: 600, letterSpacing: "0.14em", lineHeight: 1.15, color: "#f4f4f5" } },
         letters.map((l, i) => React.createElement("span", { key: i, style: { display: "inline-block", overflow: "hidden", height: "1.15em",
-            animation: `rxLetterIn .7s cubic-bezier(.2,.7,.2,1) ${(0.35 + i * 0.06).toFixed(2)}s both` } },
+            animation: animate ? `rxBrandIn 1.1s cubic-bezier(.16,1,.3,1) ${(0.45 + i * 0.07).toFixed(2)}s both` : "none" } },
           React.createElement("span", { style: { display: "flex", flexDirection: "column",
               transform: bh ? "translateY(-50%)" : "translateY(0)", transition: `transform .55s ${ease} ${(i * 0.035).toFixed(3)}s` } },
-            React.createElement("span", null, l),
+            React.createElement("span", { "data-brand-l": i }, l),
             React.createElement("span", { style: { color: "var(--a3)" } }, l))))));
     const E = React.createElement, an = (v) => animate ? v : "none";
     const ring = (s, c) => E("div", { style: { position: "absolute", width: s, height: s, borderRadius: "50%", border: "1px solid " + c } });
@@ -589,16 +606,28 @@ class Component extends DCLogic {
       E("div", { style: { display: "flex", alignItems: "center", gap: 4 } }, line(20, "rgba(255,255,255,0.55)", 0.7), E("div", { style: { width: 2, height: 10, background: "#f4f4f5", animation: an("rxBlink 1s steps(1) infinite") } })));
     const cur = items[Math.min(this.state.active ?? 0, items.length - 1)] || {};
     return {
+      headerVideo: (() => { const on = !!(cur.header && this.state.open && !this.state.fading && (this.props.showHeaderVideo ?? true));
+        const fadeY = "linear-gradient(to bottom,transparent 0%,rgba(0,0,0,0.45) 10%,#000 24%,#000 34%,rgba(0,0,0,0.35) 62%,transparent 85%)", fadeX = "linear-gradient(to right,transparent 0%,#000 18%,#000 82%,transparent 100%)";
+        if (!cur.header || !(this.props.showHeaderVideo ?? true)) return null;
+        return React.createElement(React.Fragment, null, React.createElement("div", { "aria-hidden": true, style: { flex: "none", width: "100%", aspectRatio: "100 / 30" } }), React.createElement("div", { "aria-hidden": true, style: { position: "absolute", zIndex: -1, top: 0, left: "-4%", right: "-4%", aspectRatio: "3840 / 1646", overflow: "hidden", pointerEvents: "none",
+            opacity: on ? 1 : 0, transition: "opacity .9s ease",
+            WebkitMaskImage: fadeY + "," + fadeX, maskImage: fadeY + "," + fadeX, WebkitMaskComposite: "source-in", maskComposite: "intersect" } },
+          cur.header ? React.createElement("video", { key: cur.header, src: cur.header, autoPlay: true, muted: true, loop: true, playsInline: true, preload: "metadata",
+            style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" } }) : null,
+          React.createElement("div", { style: { position: "absolute", inset: 0, background: "rgba(5,5,5,0.2)" } })));
+      })(),
+      colJustify: cur.header && (this.props.showHeaderVideo ?? true) ? "flex-start" : "center",
+      colMaxH: cur.header && (this.props.showHeaderVideo ?? true) ? "none" : "clamp(440px,48vw,640px)",
       cur, isReal: !!cur.name, isEmpty: !cur.name, shotLabel: cur.name ? cur.name + " screenshot" : "Coming soon", ...this.slideVals(cur), shotImgOld: cur.shot ? React.createElement("img", { src: cur.shot, alt: cur.name, style: { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" } }) : null,
       iconImg: cur.icon ? React.createElement("img", { src: cur.icon, alt: "", style: { width: 60, height: 60, borderRadius: 15, display: "block", flex: "none" } }) : null,
       isMac: (cur.device || "phone") === "mac", isPhone: (cur.device || "phone") === "phone", isTablet: cur.device === "tablet", isDual: cur.device === "dual", panelOpacity: (this.state.fading || !this.state.open) ? 0 : 1, panelShift: (this.state.fading || !this.state.open) ? 18 : 0,
       panelRows: this.state.open ? "1fr" : "0fr",
       zoneDot: this.state.zone ? 0.9 : 0.2,
       visConsult, visDev,
-      palW: this.state.palOpen ? "260px" : "0px", palO: this.state.palOpen ? 1 : 0, palExp: this.state.palOpen ? "true" : "false",
+      palW: this.state.palOpen ? "260px" : "0px", palVis: this.state.palOpen ? "visible" : "hidden", palVisDelay: this.state.palOpen ? "0s" : ".5s", palPad: this.state.palOpen ? "14px" : "0px", palHidden: this.state.palOpen ? "false" : "true", palO: this.state.palOpen ? 1 : 0, palExp: this.state.palOpen ? "true" : "false",
       togglePal: () => this.setState(s => ({ palOpen: !s.palOpen })),
       swatches: ["white", "pureRed", "red", "crimson", "rose", "orange", "violet", "blue", "cyan"].filter(k => this.palettes[k]).map(k => { const on = k === this.curPal();
-        return { name: k === "pureRed" ? "Red" : k === "red" ? "Coral" : k[0].toUpperCase() + k.slice(1), on: on ? "true" : "false", c: this.palettes[k][2],
+        return { name: k === "pureRed" ? "Red" : k === "red" ? "Coral" : k[0].toUpperCase() + k.slice(1), on: on ? "true" : "false", tab: this.state.palOpen ? 0 : -1, c: this.palettes[k][2],
           ring: on ? "0 0 0 2px #050505, 0 0 0 3.5px rgba(255,255,255,0.85)" : "0 0 0 1px rgba(255,255,255,0.12)",
           pick: () => { try { localStorage.setItem("rexiox-palette", k); } catch (e) {} this.setState({ userPal: k }); } }; }),
       barGlow: React.createElement("div", { "aria-hidden": "true", style: { position: "absolute", left: "50%", top: "62vh", width: "110vw", height: "38vh", borderRadius: "50%", pointerEvents: "none",
