@@ -21,15 +21,15 @@ a:hover{text-decoration:underline}
 p,li,td{color:var(--text)}
 strong{font-weight:600}
 /* nav */
-.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 80%,transparent);
-  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+/* Solid dark bar with white text in both themes; :visited/:active stop links turning blue. */
+.nav{position:sticky;top:0;z-index:10;background:#1d1d1f;border-bottom:1px solid #000}
 .nav-in{max-width:980px;margin:0 auto;padding:0 22px;height:48px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{color:var(--text);font-weight:600;font-size:17px;letter-spacing:-.02em}
-.brand:hover{text-decoration:none}
+.nav a,.nav a:link,.nav a:visited,.nav a:hover,.nav a:active,.nav a:focus{color:#fff;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.02em}
 .links{display:flex;gap:22px}
-.links a{color:var(--muted);font-size:13px}
-.links a:hover{color:var(--text);text-decoration:none}
-.links a[aria-current]{color:var(--text)}
+.links a,.links a:visited{font-size:13px;opacity:.8}
+.links a:hover,.links a[aria-current]{opacity:1}
+.links a[aria-current]{font-weight:600}
 /* hero */
 .hero{max-width:980px;margin:0 auto;padding:56px 22px 8px}
 .eyebrow{display:none}
@@ -87,68 +87,88 @@ footer{background:var(--bg2);color:var(--muted);font-size:12px}
 </head>
 <body>
 <nav class="nav"><div class="nav-in"><a class="brand" href="index.html">Scriba</a><div class="links"><a href="support.html">Support</a><a href="privacy-policy.html" aria-current="page">Privacy</a><a href="terms-of-use.html">Terms</a></div></div></nav>
-<header class="hero"><h1>Scriba Privacy Policy</h1><p class="lede">Scriba is a simple writing app. Everything you write stays on your device — not on our servers.</p><div class="meta">Effective date: October 27, 2026 · Applies to Scriba for Android and iOS</div></header>
+<header class="hero"><h1>Scriba Privacy Policy</h1><p class="lede">Scriba is a simple writing app. Everything you write stays on your device — not on our servers.</p><div class="meta">Effective date: October 29, 2026 · Applies to Scriba for Android and iOS</div></header>
 <div class="wrap"><article>
 <section id="summary"><div class="card"><h2><span class="n">00</span>At a glance</h2><div class="summary">
 <div class="key"><b>No account</b><span>You never sign up or log in to use Scriba.</span></div>
-<div class="key"><b>No tracking</b><span>No ads, no analytics SDKs, no cross-app tracking.</span></div>
-<div class="key"><b>Stays on your device</b><span>Your notes, folders, images and voice notes are stored only on your phone.</span></div>
-<div class="key"><b>No servers</b><span>We don't run servers that receive your writing.</span></div>
+<div class="key"><b>Your writing stays yours</b><span>Notes, folders, images and voice notes are stored only on your device. We can't read them.</span></div>
+<div class="key"><b>No ads</b><span>No advertising, and we never sell your data.</span></div>
+<div class="key"><b>Limited diagnostics</b><span>On Android, Firebase sends us usage statistics and crash reports. They never contain what you write.</span></div>
 </div></div></section>
 <section id="who"><h2><span class="n">01</span>Who we are</h2>
-<p>Scriba is developed and published by <strong>Rexiox</strong> (“we”, “us”). For the EU/UK General Data Protection Regulation (GDPR), the Turkish Personal Data Protection Law No. 6698 (KVKK) and similar laws, we are the controller of the limited personal data described here — mainly the messages you choose to send us.</p>
+<p>Scriba is developed and published by <strong>Rexiox</strong> (“we”, “us”). For the EU/UK General Data Protection Regulation (GDPR), the Turkish Personal Data Protection Law No. 6698 (KVKK) and similar laws, we are the controller of the limited personal data described here.</p>
 </section>
 <section id="collect"><h2><span class="n">02</span>What we collect</h2>
-<p><strong>We do not collect personal data through the app.</strong> Your notes, folders, images, voice notes and settings are never sent to us, and we can't see what you write.</p>
+<p><strong>We never collect what you write.</strong> Your notes, folders, images, drawings, voice notes and their contents are never sent to us.</p>
 <p>The only information that can reach us is:</p><ul>
-<li><strong>Support messages.</strong> If you email us at <a href="mailto:contact.rexiox@gmail.com">contact.rexiox@gmail.com</a>, we receive your email address and whatever you include. We use it only to answer you.</li>
-<li><strong>Crash reports — only if you allow it.</strong> Google Play and Apple may share anonymized crash and performance data with developers when you have enabled this in your device settings.</li>
+<li><strong>Usage statistics and crash reports (Android).</strong> The Android app uses Google Firebase Analytics and Firebase Crashlytics. See <a href="#diagnostics">Usage statistics &amp; crash reports</a> below.</li>
+<li><strong>Store crash reports.</strong> Google Play and Apple may also share anonymized crash and performance data with developers when you have enabled this in your device settings.</li>
 <li><strong>Purchases.</strong> Scriba Pro is bought through Google Play or the App Store, which handle payment. To check whether Pro is active, the app uses RevenueCat, which receives an anonymous app user ID, your purchase and subscription status, and basic device and app information. We never see your payment details.</li>
+<li><strong>Support messages.</strong> If you email us at <a href="mailto:contact.rexiox@gmail.com">contact.rexiox@gmail.com</a>, we receive your email address and whatever you include. We use it only to answer you.</li>
 <li><strong>Aggregate store statistics.</strong> Google Play and the App Store give developers aggregated, non-identifying figures such as install counts.</li></ul>
 </section>
-<section id="device"><h2><span class="n">03</span>Data stored on your device</h2>
+<section id="diagnostics"><h2><span class="n">03</span>Usage statistics &amp; crash reports</h2>
+<p>The <strong>Android</strong> version of Scriba uses two Google services to help us understand how the app is used and to fix bugs. The iOS version does not include them.</p>
+<table><tr><th>Service</th><th>What it collects</th><th>Why</th></tr>
+<tr><td>Firebase Analytics</td><td>A random app instance ID, the Android advertising ID where your device provides one, device model, OS and app version, language, approximate country or region (derived from your IP address, which is not stored), and app events such as first open, sessions, screens viewed and in-app purchases.</td><td>To see which features are used, how stable releases are and how the app can be improved.</td></tr>
+<tr><td>Firebase Crashlytics</td><td>When the app crashes or hits a serious error: the error and stack trace, device model, OS and app version, free memory and disk space, the time, and a random installation ID.</td><td>To find and fix crashes.</td></tr></table>
+<p>These reports <strong>never include the contents of your notes</strong>, note titles, images, voice notes, passwords or backup files. We do not use them to identify you, for advertising, or to track you across other apps and websites, and we have not linked Firebase to any advertising service.</p>
+<p><strong>Legal basis:</strong> our legitimate interest in keeping the app stable and improving it (GDPR Art. 6(1)(f), KVKK Art. 5(2)(f)).</p>
+<p><strong>Where the data goes:</strong> Firebase is provided by Google, which may process this data on servers outside your country, including in the United States. Google acts as our data processor under its <a href="https://firebase.google.com/terms/data-processing-terms">Firebase data processing terms</a>, which include the safeguards required for international transfers.</p>
+<p><strong>How long it is kept:</strong> Analytics data linked to an app instance ID is kept for up to 14 months; Crashlytics crash reports are kept for 90 days. After that they are deleted automatically.</p>
+<p><strong>Your choices:</strong> you can reset or delete your advertising ID in your Android settings (<em>Settings → Google → Ads</em> or <em>Settings → Privacy → Ads</em>). Uninstalling Scriba stops all collection. You can also ask us to delete this data (see <a href="#rights">Your rights</a>).</p>
+</section>
+<section id="device"><h2><span class="n">04</span>Data stored on your device</h2>
 <table><tr><th>Data</th><th>Purpose</th></tr>
 <tr><td>Notes, folders and their contents</td><td>Showing and editing your writing</td></tr>
 <tr><td>Images, drawings and voice notes you add to notes</td><td>Showing and playing them inside your notes</td></tr>
 <tr><td>Earlier versions of each note</td><td>Version history, so you can look back at or restore an earlier version. Up to 50 versions per note are kept, and older ones are removed automatically.</td></tr>
-<tr><td>Settings: theme, font, language, passcode lock, editor preferences, writing goals, read-aloud speed and voice</td><td>Remembering your preferences. The passcode is stored encrypted with your device's secure key store.</td></tr></table>
-<p>This data stays inside the app's private storage. It leaves your device only through your own system backup (see below), or when you choose to share or export a note or save a backup file.</p>
+<tr><td>Writing goals, daily word counts and writing streaks</td><td>Showing your progress in the app and in the home screen widget</td></tr>
+<tr><td>Settings: theme, font, language, passcode lock, editor preferences, writing goals and reminder time, read-aloud speed and voice, mascot and backup preferences</td><td>Remembering your preferences. The passcode and backup encryption keys are stored encrypted with your device's secure key store (Android Keystore / iOS Keychain).</td></tr>
+<tr><td>Access to the Auto Backup folder you picked (Scriba Pro)</td><td>Writing automatic backups to that folder</td></tr></table>
+<p>This data stays inside the app's private storage. It leaves your device only through your own system backup or a backup file you save (see below), or when you choose to share or export a note.</p>
 </section>
-<section id="backup"><h2><span class="n">04</span>Device backups</h2>
-<p><strong>Android:</strong> if Android backup is on, your notes, images and voice notes can be included in your device backup to your own Google account. Encrypted settings, including your passcode, are excluded from backups.</p>
-<p><strong>iOS:</strong> notes, images and voice notes are part of your iCloud or computer backup if you have device backup enabled.</p>
+<section id="backup"><h2><span class="n">05</span>Backups</h2>
+<p><strong>Android device backup:</strong> if Android backup is on, your notes, images and voice notes can be included in your device backup to your own Google account. Encrypted settings, including your passcode, are excluded.</p>
+<p><strong>iOS device backup:</strong> notes, images and voice notes are part of your iCloud or computer backup if you have device backup enabled.</p>
 <p>These backups are handled by Google or Apple under your account. We have no access to them.</p>
-<p><strong>Backup files:</strong> <em>Back Up Data</em> in Settings saves all your notes, folders and attached media to a file in a place you choose. The file is not encrypted and is never sent to us; keep it somewhere safe.</p>
+<p><strong>Backup files:</strong> <em>Back Up Data</em> in Settings saves all your notes, folders, version history, attached media and settings to a file in a place you choose. The file is never sent to us.</p>
+<p><strong>Backup encryption:</strong> if you turn on <em>Encrypt Backups</em>, backup files are encrypted on your device with a password you choose (AES-256). We never receive the password and can't recover it. Without encryption, anyone who has the file can read your notes, so keep it somewhere safe.</p>
+<p><strong>Auto Backup (Scriba Pro):</strong> if you turn it on, Scriba saves a backup file to a folder you pick, daily, weekly or monthly, and keeps the newest 7 files. If you pick a cloud folder such as Google Drive or iCloud Drive, that provider stores the files under its own privacy policy and your account; we have no access to them.</p>
 </section>
-<section id="permissions"><h2><span class="n">05</span>Permissions</h2>
+<section id="permissions"><h2><span class="n">06</span>Permissions</h2>
 <ul>
 <li><strong>Photos:</strong> when you add an image, Scriba opens the system photo picker. Only the image you pick is shared with the app; Scriba does not request access to your photo library.</li>
 <li><strong>Microphone (and Speech Recognition on iOS):</strong> used only for dictation and voice notes, and only when you start one in the editor. Before the system asks for this permission, Scriba explains why it needs it, and you can decline and keep using the rest of the app. Your speech is turned into text by your device's speech recognition service (Google on Android, Apple on iOS); Scriba prefers on-device recognition when it is available, otherwise that service may process the audio online under Google's or Apple's privacy policy. For dictation, Scriba does not record or store your voice — only the resulting text is added to your note. <strong>Voice notes</strong> are recordings you choose to make: they are saved inside the note on your device, are never sent to us, and you can remove them at any time. You can turn this permission off at any time in your device settings.</li>
-<li><strong>Files:</strong> importing and exporting notes (.txt, .md, .docx, .pdf, .html, .scriba) and saving or restoring backups use the system file picker. Scriba only reads or writes the file you choose.</li>
+<li><strong>Notifications:</strong> used only for the daily writing reminder, and asked for only when you turn the reminder on. Reminders are scheduled on your device; nothing is sent from a server.</li>
+<li><strong>Files and folders:</strong> importing and exporting notes (.txt, .md, .docx, .pdf, .html, .scriba) and saving or restoring backups use the system file picker. Scriba only reads or writes the file you choose. For Auto Backup, Scriba keeps access to the one folder you picked until you change it or turn the feature off.</li>
+<li><strong>Home screen widget:</strong> shows your writing progress from data stored on your device. It needs no permission.</li>
 <li><strong>Spell check:</strong> uses your device's built-in spell checker. Your text is not sent to us.</li>
 <li><strong>Read aloud:</strong> uses the text-to-speech voices on your device and needs no permission. The text is read on your device and is not sent to us.</li>
-<li><strong>Internet:</strong> used to load the support and legal pages shown inside the app, to check your Scriba Pro status, and for app updates and ratings through Google Play or the App Store. Your notes are never uploaded.</li>
-<li><strong>Sharing:</strong> when you share a note, the system share sheet sends it to the app you choose. That app's own privacy policy then applies.</li></ul>
+<li><strong>Internet:</strong> used to load the support and legal pages shown inside the app, to check your Scriba Pro status, to send usage statistics and crash reports on Android, and for app updates and ratings through Google Play or the App Store. Your notes are never uploaded.</li>
+<li><strong>Sharing:</strong> when you share a note, a quote card or a progress picture, the system share sheet sends it to the app you choose. That app's own privacy policy then applies.</li></ul>
 </section>
-<section id="third"><h2><span class="n">06</span>Third parties</h2>
-<p>Scriba contains no advertising, analytics or tracking SDKs, and we do not sell or share personal data.</p>
+<section id="third"><h2><span class="n">07</span>Third parties</h2>
+<p>Scriba contains no advertising SDKs, and we do not sell personal data. We work only with these service providers:</p>
 <ul>
+<li><strong>Google Firebase</strong> (Analytics and Crashlytics, Android only) as described above (<a href="https://firebase.google.com/support/privacy">Firebase privacy information</a>, <a href="https://policies.google.com/privacy">Google privacy policy</a>).</li>
 <li><strong>RevenueCat</strong> manages Scriba Pro purchases as described above (<a href="https://www.revenuecat.com/privacy">RevenueCat privacy policy</a>).</li>
 <li><strong>Google and Apple</strong> provide the app stores, payments, in-app updates and rating prompts and, for dictation, the system speech recognition service (<a href="https://policies.google.com/privacy">Google privacy policy</a>, <a href="https://www.apple.com/legal/privacy/">Apple privacy policy</a>).</li></ul>
 </section>
-<section id="retention"><h2><span class="n">07</span>Retention &amp; deletion</h2>
-<p>You can delete any note or folder inside the app. Uninstalling Scriba removes all of its data from your device. To remove copies in your device backups, manage them in your Google or Apple account settings. Support emails are deleted once your question is resolved, unless we need them for legal reasons.</p>
+<section id="retention"><h2><span class="n">08</span>Retention &amp; deletion</h2>
+<p>You can delete any note or folder inside the app. Uninstalling Scriba removes all of its data from your device. Backup files you saved, including Auto Backup files, stay where you saved them until you delete them. To remove copies in your device backups, manage them in your Google or Apple account settings.</p>
+<p>Firebase Analytics data is deleted after up to 14 months and Crashlytics reports after 90 days. Support emails are deleted once your question is resolved, unless we need them for legal reasons.</p>
 </section>
-<section id="rights"><h2><span class="n">08</span>Your rights</h2>
-<p>Depending on where you live (for example under GDPR or KVKK), you have the right to access, correct or delete personal data we hold about you, and to object to its processing. Since we only hold support emails, write to <a href="mailto:contact.rexiox@gmail.com">contact.rexiox@gmail.com</a> and we will respond within 30 days.</p>
+<section id="rights"><h2><span class="n">09</span>Your rights</h2>
+<p>Depending on where you live (for example under GDPR or KVKK), you have the right to access, correct or delete personal data we hold about you, to object to or restrict its processing, and to complain to your data protection authority (in Türkiye, the KVKK Board). Write to <a href="mailto:contact.rexiox@gmail.com">contact.rexiox@gmail.com</a> and we will respond within 30 days. Because usage statistics and crash reports are not linked to your name or email, we may ask for details that help us find them, such as your device model and the approximate time of a crash.</p>
 </section>
-<section id="children"><h2><span class="n">09</span>Children</h2>
+<section id="children"><h2><span class="n">10</span>Children</h2>
 <p>Scriba is not directed at children under 13, and we do not knowingly collect personal data from children.</p>
 </section>
-<section id="changes"><h2><span class="n">10</span>Changes</h2>
+<section id="changes"><h2><span class="n">11</span>Changes</h2>
 <p>If we change this policy, we will update the effective date above. If a change affects how your data is handled, we will tell you in the app before it takes effect.</p>
 </section>
-<section id="contact"><h2><span class="n">11</span>Contact</h2>
+<section id="contact"><h2><span class="n">12</span>Contact</h2>
 <p>Rexiox · <a href="mailto:contact.rexiox@gmail.com">contact.rexiox@gmail.com</a></p>
 </section>
 

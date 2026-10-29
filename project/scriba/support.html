@@ -21,15 +21,15 @@ a:hover{text-decoration:underline}
 p,li,td{color:var(--text)}
 strong{font-weight:600}
 /* nav */
-.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 80%,transparent);
-  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+/* Solid dark bar with white text in both themes; :visited/:active stop links turning blue. */
+.nav{position:sticky;top:0;z-index:10;background:#1d1d1f;border-bottom:1px solid #000}
 .nav-in{max-width:980px;margin:0 auto;padding:0 22px;height:48px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{color:var(--text);font-weight:600;font-size:17px;letter-spacing:-.02em}
-.brand:hover{text-decoration:none}
+.nav a,.nav a:link,.nav a:visited,.nav a:hover,.nav a:active,.nav a:focus{color:#fff;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.02em}
 .links{display:flex;gap:22px}
-.links a{color:var(--muted);font-size:13px}
-.links a:hover{color:var(--text);text-decoration:none}
-.links a[aria-current]{color:var(--text)}
+.links a,.links a:visited{font-size:13px;opacity:.8}
+.links a:hover,.links a[aria-current]{opacity:1}
+.links a[aria-current]{font-weight:600}
 /* hero */
 .hero{max-width:980px;margin:0 auto;padding:56px 22px 8px}
 .eyebrow{display:none}
@@ -87,7 +87,7 @@ footer{background:var(--bg2);color:var(--muted);font-size:12px}
 </head>
 <body>
 <nav class="nav"><div class="nav-in"><a class="brand" href="index.html">Scriba</a><div class="links"><a href="support.html" aria-current="page">Support</a><a href="privacy-policy.html">Privacy</a><a href="terms-of-use.html">Terms</a></div></div></nav>
-<header class="hero"><h1>Scriba Support</h1><p class="lede">Answers to common questions, and how to reach us.</p><div class="meta">Last updated: October 27, 2026 · Applies to Scriba for Android and iOS</div></header>
+<header class="hero"><h1>Scriba Support</h1><p class="lede">Answers to common questions, and how to reach us.</p><div class="meta">Last updated: October 29, 2026 · Applies to Scriba for Android and iOS</div></header>
 <div class="wrap"><article>
 <section id="start"><h2><span class="n">01</span>Getting started</h2>
 <ul>
@@ -103,11 +103,13 @@ footer{background:var(--bg2);color:var(--muted);font-size:12px}
 </section>
 <section id="faq"><h2><span class="n">02</span>Frequently asked</h2>
 <h3>Where are my notes stored?</h3><p>Only on your device. Scriba has no account and no cloud sync.</p>
-<h3>How do I move my notes to a new phone?</h3><p>Either use your device backup (Android backup to your Google account, or iCloud / computer backup on iPhone), or save a backup file from Settings with <em>Back Up Data</em> and open it on the new phone with <em>Restore from Backup</em>. Restoring replaces the notes currently in the app. Your passcode is not included on Android; set it again after restoring.</p>
-<h3>Is the backup file protected?</h3><p>No. The backup file is not encrypted, and anyone who has it can read your notes, including locked ones. Keep it somewhere only you can reach.</p>
+<h3>Does Scriba collect any data?</h3><p>Never your writing. On Android, Scriba sends anonymous usage statistics and crash reports through Google Firebase so we can fix bugs; these never include your notes. Details are in the <a href="privacy-policy.html">Privacy Policy</a>.</p>
+<h3>How do I move my notes to a new phone?</h3><p>Either use your device backup (Android backup to your Google account, or iCloud / computer backup on iPhone), or save a backup file from Settings with <em>Back Up Data</em> and open it on the new phone with <em>Restore from Backup</em>. Restoring replaces the notes currently in the app and applies the backup's settings. An encrypted backup asks for its password. Your passcode is not included on Android; set it again after restoring.</p>
+<h3>Is the backup file protected?</h3><p>Only if you turn on <em>Encrypt Backups</em> in Settings. Then backup files can't be opened without your password; this phone opens its own backups without asking, another phone needs the password. If you forget it, encrypted backups can't be recovered. Without encryption, anyone who has the file can read your notes, including locked ones.</p>
+<h3>How does Auto Backup work? (Pro)</h3><p>Turn on <em>Auto Backup to Folder</em> in Settings and pick a folder. Scriba saves a backup there daily, weekly or monthly while you use the app, and keeps the newest 7 files. Pick a cloud folder such as Google Drive or iCloud Drive so your backups survive a phone reset.</p>
 <h3>I forgot my passcode.</h3><p>For your privacy, we cannot see or reset it. Contact us and we'll help with the options available.</p>
 <h3>How do I delete everything?</h3><p>Delete notes and folders inside the app, or uninstall Scriba to remove all of its data from the device.</p>
-<h3>What is free and what is Scriba Pro?</h3><p>Writing, folders, images, drawings, voice notes, search, import, export to text, Markdown, web page and Scriba file, backups, read aloud, spell check and the last 7 days of version history are free. Scriba Pro is an optional subscription that adds extra themes and fonts, dictation, the live text analyzer, password locks for notes and folders, page background images, extra templates, PDF and Word export (one free export of each is included) and version history older than 7 days.</p>
+<h3>What is free and what is Scriba Pro?</h3><p>Writing, folders, images, drawings, voice notes, search, import, export to text, Markdown, web page and Scriba file, backups (including encryption), read aloud, spell check, writing goals, reminders and the widget, and the last 7 days of version history are free. Scriba Pro is an optional subscription that adds extra themes and fonts, dictation, the live text analyzer, password locks for notes and folders, page background images, extra templates, PDF and Word export (one free export of each is included), Auto Backup to a folder and version history older than 7 days.</p>
 <h3>How do I cancel or restore Scriba Pro?</h3><p>Subscriptions are handled by Google Play or the App Store. Cancel any time in your store account (Google Play: <em>Payments &amp; subscriptions → Subscriptions</em>; iPhone: <em>Settings → your name → Subscriptions</em>). On a new phone, sign in with the same store account, open the Pro screen and tap <em>Restore purchases</em>. Refunds follow Google's or Apple's refund policy.</p>
 <h3>Why does Scriba ask for the microphone?</h3><p>Dictation and voice notes need the microphone (dictation on iPhone and iPad also needs Speech Recognition). Scriba asks only when you first use one of them, explains why first, and works fine if you say no. With dictation your voice isn't recorded or stored; only the text is added to your note. Voice notes are saved inside the note on your device and never sent to us.</p>
 <h3>I turned the microphone off. How do I turn it back on?</h3><p>Tap the microphone again and choose <em>Open Settings</em>, or open your device settings → Apps → Scriba → Permissions (Android) or Settings → Scriba (iPhone) and allow Microphone and Speech Recognition.</p>

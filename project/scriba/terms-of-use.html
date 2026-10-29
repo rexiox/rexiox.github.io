@@ -21,15 +21,15 @@ a:hover{text-decoration:underline}
 p,li,td{color:var(--text)}
 strong{font-weight:600}
 /* nav */
-.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 80%,transparent);
-  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+/* Solid dark bar with white text in both themes; :visited/:active stop links turning blue. */
+.nav{position:sticky;top:0;z-index:10;background:#1d1d1f;border-bottom:1px solid #000}
 .nav-in{max-width:980px;margin:0 auto;padding:0 22px;height:48px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.brand{color:var(--text);font-weight:600;font-size:17px;letter-spacing:-.02em}
-.brand:hover{text-decoration:none}
+.nav a,.nav a:link,.nav a:visited,.nav a:hover,.nav a:active,.nav a:focus{color:#fff;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.02em}
 .links{display:flex;gap:22px}
-.links a{color:var(--muted);font-size:13px}
-.links a:hover{color:var(--text);text-decoration:none}
-.links a[aria-current]{color:var(--text)}
+.links a,.links a:visited{font-size:13px;opacity:.8}
+.links a:hover,.links a[aria-current]{opacity:1}
+.links a[aria-current]{font-weight:600}
 /* hero */
 .hero{max-width:980px;margin:0 auto;padding:56px 22px 8px}
 .eyebrow{display:none}
@@ -87,7 +87,7 @@ footer{background:var(--bg2);color:var(--muted);font-size:12px}
 </head>
 <body>
 <nav class="nav"><div class="nav-in"><a class="brand" href="index.html">Scriba</a><div class="links"><a href="support.html">Support</a><a href="privacy-policy.html">Privacy</a><a href="terms-of-use.html" aria-current="page">Terms</a></div></div></nav>
-<header class="hero"><h1>Scriba Terms of Use</h1><p class="lede">The rules for using Scriba, in plain language.</p><div class="meta">Effective date: October 27, 2026 · Applies to Scriba for Android and iOS</div></header>
+<header class="hero"><h1>Scriba Terms of Use</h1><p class="lede">The rules for using Scriba, in plain language.</p><div class="meta">Effective date: October 29, 2026 · Applies to Scriba for Android and iOS</div></header>
 <div class="wrap"><article>
 <section id="agreement"><h2><span class="n">01</span>Agreement</h2>
 <p>By downloading or using Scriba you agree to these Terms. If you don't agree, please don't use the app. If you got Scriba from the App Store, Apple's Standard End User License Agreement also applies.</p>
@@ -96,13 +96,13 @@ footer{background:var(--bg2);color:var(--muted);font-size:12px}
 <p>We grant you a personal, non-exclusive, non-transferable license to use Scriba on devices you own or control. You may not copy, modify, reverse-engineer or redistribute the app except where the law allows it.</p>
 </section>
 <section id="content"><h2><span class="n">03</span>Your content</h2>
-<p>Everything you write in Scriba belongs to you. Your content is stored on your device; we do not receive, review or claim any rights to it. You are responsible for what you write and share.</p>
+<p>Everything you write in Scriba belongs to you. Your content is stored on your device; we do not receive, review or claim any rights to it. You are responsible for what you write and share. How we handle the limited data the app does send, such as crash reports, is explained in our <a href="privacy-policy.html">Privacy Policy</a>.</p>
 </section>
 <section id="data"><h2><span class="n">04</span>Backups &amp; passcode</h2>
-<p>Because your notes live only on your device, you are responsible for keeping backups. Backup files you save from the app are not encrypted, so keep them somewhere safe. If you enable the passcode lock or lock a note or folder, keep the password safe: we have no way to see or reset it.</p>
+<p>Because your notes live only on your device, you are responsible for keeping backups. Backup files are unencrypted unless you turn on <em>Encrypt Backups</em>, so keep them somewhere safe. Auto Backup writes to a folder you pick; we can't guarantee that the folder, or the cloud service behind it, stays available. If you set a passcode, a backup password, or lock a note or folder, keep the password safe: we have no way to see, reset or recover it, and an encrypted backup can't be opened without its password on another device.</p>
 </section>
 <section id="pro"><h2><span class="n">05</span>Scriba Pro &amp; subscriptions</h2>
-<p>Scriba is free to use. Scriba Pro is an optional paid subscription that unlocks extra features, such as extra themes and fonts, dictation, the live text analyzer, password locks for notes and folders, page background images, extra templates, PDF and Word export (one free export of each is included) and version history older than 7 days. The price and billing period are shown before you buy.</p>
+<p>Scriba is free to use. Scriba Pro is an optional paid subscription that unlocks extra features, such as extra themes and fonts, dictation, the live text analyzer, password locks for notes and folders, page background images, extra templates, PDF and Word export (one free export of each is included), Auto Backup to a folder and version history older than 7 days. The price and billing period are shown before you buy.</p>
 <ul>
 <li>Payment is charged to your Google Play or Apple ID account when you confirm the purchase.</li>
 <li>The subscription renews automatically at the end of each period unless you cancel it at least 24 hours before the period ends. Your account is charged for the renewal within the 24 hours before the period ends.</li>
@@ -118,7 +118,7 @@ footer{background:var(--bg2);color:var(--muted);font-size:12px}
 <p>We may update, change or stop offering features at any time. Some updates may be needed to keep using the app.</p>
 </section>
 <section id="disclaimer"><h2><span class="n">08</span>Disclaimer</h2>
-<p>Scriba is provided “as is” without warranties of any kind, to the extent permitted by law. We do not guarantee that the app will be error-free or that data will never be lost. Dictation, read aloud and spell check rely on your device's services, and we do not guarantee the accuracy of recognized or spoken text.</p>
+<p>Scriba is provided “as is” without warranties of any kind, to the extent permitted by law. We do not guarantee that the app will be error-free or that data will never be lost. Dictation, read aloud, spell check and Auto Backup rely on your device's and other providers' services, and we do not guarantee the accuracy of recognized or spoken text.</p>
 </section>
 <section id="liability"><h2><span class="n">09</span>Limitation of liability</h2>
 <p>To the maximum extent permitted by law, Rexiox is not liable for indirect or consequential damages, including loss of data, arising from your use of the app. Nothing in these Terms limits rights you have as a consumer under the law of your country.</p>
