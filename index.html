@@ -46,7 +46,7 @@ a{color:#f4f4f5}a:hover{color:#fff}
   <div data-spot="1" style="position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s ease;background:radial-gradient(520px circle at var(--mx,50%) var(--my,60%),color-mix(in srgb,var(--a3) 16%,transparent),transparent 65%)"></div>
   <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,#050505 0%,rgba(5,5,5,0.7) 30%,rgba(5,5,5,0) 55%)"></div>
 
-  <header data-header="1" style="position:fixed;z-index:20;top:20px;left:50%;transform:translateX(-50%);width:min(760px,calc(100% - 32px));transition:width .6s cubic-bezier(.2,.7,.2,1),background .4s ease,border-color .4s ease,top .5s cubic-bezier(.2,.7,.2,1);display:flex;align-items:center;gap:16px;padding:10px 10px 10px 14px;border-radius:999px;background:rgba(24,24,27,0.72);border:1px solid rgba(255,255,255,0.07);backdrop-filter:blur(16px)">
+  <header data-header="1" style="position:fixed;z-index:20;top:20px;left:50%;transform:translateX(-50%);width:min(760px,calc(100% - 32px));transition:width .6s cubic-bezier(.2,.7,.2,1),background .4s ease,border-color .4s ease,top .5s cubic-bezier(.2,.7,.2,1);display:flex;align-items:center;gap:16px;padding:10px 10px 10px 14px;border-radius:999px;background:rgba(24,24,27,0.72);border:1px solid rgba(255,255,255,0.07);backdrop-filter:blur(12px)">
     <a href="#top" aria-label="Rexiox" style="display:flex;align-items:center;text-decoration:none;margin-right:auto;padding:2px 6px 2px 0">{{ brand }}</a>
     <nav data-nav="1" style="position:relative;display:flex;align-items:center;gap:2px;font-size:15px">
       <span data-nav-pill="1" style="position:absolute;top:0;bottom:0;left:0;width:0;border-radius:999px;background:rgba(255,255,255,0.08);opacity:0;pointer-events:none;transition:left .45s cubic-bezier(.2,.7,.2,1),width .45s cubic-bezier(.2,.7,.2,1),opacity .3s ease"></span>
@@ -63,7 +63,7 @@ a{color:#f4f4f5}a:hover{color:#fff}
     </nav>
   </header>
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
-  <div style="position:fixed;z-index:19;top:80px;left:16px;right:16px;display:flex;flex-direction:column;padding:8px;border-radius:24px;background:rgba(14,14,16,0.94);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);animation:rxMenuIn .35s cubic-bezier(.16,1,.3,1) both">
+  <div style="position:fixed;z-index:19;top:80px;left:16px;right:16px;display:flex;flex-direction:column;padding:8px;border-radius:24px;background:rgba(14,14,16,0.94);border:1px solid rgba(255,255,255,0.1);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);animation:rxMenuIn .35s cubic-bezier(.16,1,.3,1) both">
     <a href="#about" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:48px;padding:0 16px;border-radius:16px;font-size:17px;color:#f4f4f5;text-decoration:none" style-hover="background:rgba(255,255,255,0.06);color:#fff">About</a>
     <a href="#apps" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:48px;padding:0 16px;border-radius:16px;font-size:17px;color:#f4f4f5;text-decoration:none" style-hover="background:rgba(255,255,255,0.06);color:#fff">Apps</a>
     <a href="#services" onClick="{{ closeMenu }}" style="display:flex;align-items:center;min-height:48px;padding:0 16px;border-radius:16px;font-size:17px;color:#f4f4f5;text-decoration:none" style-hover="background:rgba(255,255,255,0.06);color:#fff">Services</a>
@@ -354,7 +354,7 @@ class Component extends DCLogic {
         hc.style.visibility = t >= 1 ? "hidden" : "visible";
         if (bars) bars.style.transform = `translate3d(0,${Math.round(y * 0.12)}px,0)`;
       }
-      const heroOff = y > vh * 1.1;
+      const heroOff = !!bars && bars.getBoundingClientRect().bottom < -50;
       if (heroOff !== this.heroOff) { this.heroOff = heroOff; const hs = q('[data-hero]'); if (hs) hs.style.setProperty('--rxps', heroOff ? 'paused' : 'running'); if (bars) bars.style.visibility = heroOff ? 'hidden' : 'visible'; }
       if (hd && (y > 40) !== this.hdS) {
         const s = y > 40; this.hdS = s;
@@ -366,6 +366,11 @@ class Component extends DCLogic {
     });
   };
   onHeroMove = (e) => {
+    this.hmE = { currentTarget: e.currentTarget, clientX: e.clientX, clientY: e.clientY };
+    if (this.hmR) return;
+    this.hmR = requestAnimationFrame(() => { this.hmR = 0; this.onHeroMoveNow(this.hmE); });
+  };
+  onHeroMoveNow = (e) => {
     const sec = e.currentTarget, rc = sec.getBoundingClientRect();
     const fx = (e.clientX - rc.left) / rc.width, fy = (e.clientY - rc.top) / rc.height;
     sec.style.setProperty("--mx", (fx * 100).toFixed(1) + "%"); sec.style.setProperty("--my", (fy * 100).toFixed(1) + "%");
@@ -374,6 +379,7 @@ class Component extends DCLogic {
     bs.forEach((b, i) => { const g = Math.exp(-((i - ci) ** 2) / (2 * 2.2 ** 2)); b.style.transform = `scaleY(${(1 + g * 0.1).toFixed(4)})`; });
   };
   onHeroLeave = (e) => {
+    if (this.hmR) { cancelAnimationFrame(this.hmR); this.hmR = 0; }
     const sec = e.currentTarget; const spot = sec.querySelector('[data-spot]'); if (spot) spot.style.opacity = "0";
     sec.querySelectorAll('[data-bar]').forEach(b => b.style.transform = "scaleY(1)");
   };
@@ -486,12 +492,15 @@ class Component extends DCLogic {
       }
     }
     if (this.motionOK() && this.countOf(this.curItem) > 1 && t - (this.slideT || 0) > 3500) { this.slideT = t; this.goShot((this.state.slide || 0) + 1); }
-    track.style.transform = `translate3d(${this.x.toFixed(2)}px,0,0)`;
     const kids = track.children;
+    if (this.x !== this.lastX || cx !== this.lastCxP || kids.length !== this.lastK) {
+    this.lastX = this.x; this.lastCxP = cx; this.lastK = kids.length;
+    track.style.transform = `translate3d(${this.x.toFixed(2)}px,0,0)`;
     for (let q = 0; q < kids.length; q++) {
       const dd = Math.min(3, Math.abs(this.x + q * this.STEP + 62 - cx) / this.STEP), near = Math.max(0, 1 - dd);
       kids[q].style.transform = `scale(${(0.9 + 0.26 * near * near).toFixed(3)})`;
       kids[q].style.opacity = (1 - Math.min(dd, 2.5) * 0.24).toFixed(3);
+    }
     }
     if (this.anim) return;
     const want = this.pendingIdx ?? (this.state.active ?? -1);
