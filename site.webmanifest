@@ -1,0 +1,10 @@
+{
+  "name": "Rexiox",
+  "short_name": "Rexiox",
+  "description": "Independent app studio for iPhone, iPad, Mac and Android.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#050505",
+  "theme_color": "#050505",
+  "icons": [{ "src": "assets/logo.png", "sizes": "300x300", "type": "image/png" }]
+}
