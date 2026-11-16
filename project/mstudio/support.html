@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Macropad</title>
+<meta name="description" content="Get Macropad up and running: pairing, permissions, troubleshooting, Pro and iCloud sync.">
+<style>
+:root{
+  --bg:#ffffff; --bg2:#f5f5f7; --text:#1d1d1f; --muted:#6e6e73; --line:#d2d2d7; --link:#0066cc;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#000000; --bg2:#1d1d1f; --text:#f5f5f7; --muted:#a1a1a6; --line:#424245; --link:#2997ff}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.47 var(--font);letter-spacing:-.022em;-webkit-font-smoothing:antialiased}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+p,li,td{color:var(--text)}
+strong{font-weight:600}
+/* nav */
+.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 80%,transparent);
+  backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:980px;margin:0 auto;padding:0 22px;height:48px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{color:var(--text);font-weight:600;font-size:17px;letter-spacing:-.02em}
+.brand:hover{text-decoration:none}
+.links{display:flex;gap:22px}
+.links a{color:var(--muted);font-size:13px}
+.links a:hover{color:var(--text);text-decoration:none}
+.links a[aria-current]{color:var(--text)}
+/* hero */
+.hero{max-width:980px;margin:0 auto;padding:56px 22px 8px}
+.eyebrow{display:none}
+h1{font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.003em;margin:0 0 12px}
+.lede{font-size:19px;color:var(--muted);max-width:720px;margin:0}
+.meta{margin-top:14px;font-size:14px;color:var(--muted)}
+/* layout */
+.wrap,main{max-width:980px;margin:0 auto;padding:16px 22px 72px}
+.toc{display:none}
+article{max-width:760px}
+section{scroll-margin-top:64px}
+h2{font-size:24px;line-height:1.17;font-weight:600;margin:44px 0 10px}
+h2 .n{display:none}
+h3{font-size:19px;font-weight:600;margin:24px 0 6px}
+ul,ol{padding-left:22px}
+li{margin:6px 0}
+.caps{font-size:15px}
+.note{color:var(--muted);font-size:15px}
+/* boxes */
+.card{background:var(--bg2);border-radius:18px;padding:24px 26px;margin-top:8px}
+.card h2{margin-top:0}
+.summary,.steps,.req{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:8px 0}
+.key{background:var(--bg);border-radius:14px;padding:18px}
+.steps .key,.req div{background:var(--bg2);border-radius:18px;padding:22px}
+.key b{display:block;font-size:17px;font-weight:600;margin-bottom:4px}
+.key span,.key p{color:var(--muted);font-size:15px;margin:0}
+.key .led{display:none}
+.key .num{display:block;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+.key h3{margin:4px 0 6px}
+.req b{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+kbd,code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:12px 0;display:block;overflow-x:auto}
+th,td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600}
+/* support */
+.cta{display:inline-block;margin-top:22px;background:#0071e3;color:#fff;font-size:17px;padding:11px 22px;border-radius:980px}
+.cta:hover{background:#0077ed;text-decoration:none}
+.faq-group{margin-top:28px}
+.faq-group h3{font-size:14px;color:var(--muted);font-weight:600;margin:0 0 4px}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:16px 32px 16px 0;font-weight:600;position:relative}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:0;top:12px;font-size:24px;font-weight:300;color:var(--muted)}
+details[open] summary:after{content:"−"}
+details>div{padding:0 0 18px}
+details>div p:first-child{margin-top:0}
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.card ul{margin:8px 0 0}
+/* footer */
+footer{background:var(--bg2);color:var(--muted);font-size:12px}
+.foot{max-width:980px;margin:0 auto;padding:18px 22px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+.foot a{color:var(--muted)}
+@media (max-width:734px){h1{font-size:32px}.lede{font-size:17px}.links{gap:16px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in">
+  <a class="brand" href="index.html">Macropad</a>
+  <div class="links">
+    <a href="support.html" aria-current="page">Support</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="terms-of-use.html">Terms</a>
+  </div>
+</div></nav>
+
+<header class="hero">
+  <div class="eyebrow">Support</div>
+  <h1>Macropad Support</h1>
+  <p class="lede">Setup takes about a minute. If something isn't clicking, the answers below cover almost every case — and a real person is one email away.</p>
+  <a class="cta" href="mailto:r3x.lab@gmail.com?subject=Macropad%20Support">Email support</a>
+</header>
+
+<main>
+  <h2><span class="n">01</span>Get started</h2>
+  <div class="steps">
+    <div class="key"><span class="led"></span><span class="num">STEP 01</span><h3>Build</h3><p>Drag keys, knobs, faders and jog wheels from the Store onto the grid — or start from a ready-made pack like Media or Windows.</p></div>
+    <div class="key"><span class="led"></span><span class="num">STEP 02</span><h3>Assign</h3><p>Tap any component and give it a job: a shortcut like <kbd>⌘B</kbd>, a media control, a window action or a multi-step macro.</p></div>
+    <div class="key"><span class="led"></span><span class="num">STEP 03</span><h3>Connect</h3><p>Open Macropad Helper on your Mac and scan its QR code. Your iPhone is now your Mac's control deck.</p></div>
+  </div>
+
+  <h2><span class="n">02</span>Requirements</h2>
+  <div class="req">
+    <div><b>iPhone</b><span>iOS [26] or later</span></div>
+    <div><b>Mac</b><span>macOS [15] or later + Macropad Helper</span></div>
+    <div><b>Network</b><span>Both on the same Wi-Fi / local network</span></div>
+    <div><b>Mac helper</b><span><a href="[helper-download-url]">Download Macropad Helper</a></span></div>
+  </div>
+
+  <h2><span class="n">03</span>Frequently asked</h2>
+
+  <div class="faq-group">
+    <h3>Connection &amp; pairing</h3>
+    <details><summary>My iPhone can't find my Mac</summary><div>
+      <ol>
+        <li>Make sure Macropad Helper is running — look for its icon in the Mac menu bar.</li>
+        <li>Check both devices are on the <strong>same network</strong>. Guest networks and some office/hotel Wi-Fi block devices from seeing each other.</li>
+        <li>On iPhone, go to <em>Settings → Privacy &amp; Security → Local Network</em> and make sure Macropad is on.</li>
+        <li>On Mac, if the firewall is enabled, allow incoming connections for Macropad Helper in <em>System Settings → Network → Firewall → Options</em>.</li>
+        <li>Turn off VPNs on either device and try again.</li>
+      </ol>
+    </div></details>
+    <details><summary>The QR code won't scan</summary><div>
+      <p>Allow camera access in <em>Settings → Macropad → Camera</em>. Turn up your Mac's screen brightness, hold the phone 20–40 cm away, and avoid glare. You can also make the QR window larger from the Helper menu.</p>
+    </div></details>
+    <details><summary>It connects, but drops out or feels laggy</summary><div>
+      <p>Macropad talks over your local network, so a weak Wi-Fi signal is the usual cause. Move closer to the router, prefer a 5 GHz network, and disable Low Power Mode on iPhone, which can pause background networking. If it persists, unpair and pair again from the Helper menu.</p>
+    </div></details>
+    <details><summary>Can I control more than one Mac?</summary><div>
+      <p>Yes. Pair each Mac once; you can then switch between them from the connection menu in the app. Each board can remember which Mac it's meant for.</p>
+    </div></details>
+  </div>
+
+  <div class="faq-group">
+    <h3>Actions &amp; permissions</h3>
+    <details><summary>Keys light up, but nothing happens on my Mac</summary><div>
+      <p>macOS needs your permission before any app can send keystrokes. Open <em>System Settings → Privacy &amp; Security → Accessibility</em> and turn on <strong>Macropad Helper</strong>. If it's already on, toggle it off and on again, then restart the Helper — macOS sometimes needs this after an update.</p>
+    </div></details>
+    <details><summary>A shortcut works in one app but not another</summary><div>
+      <p>Shortcuts are sent to whichever app is in front. Make sure the target app is focused, and that the shortcut is the same in that app — many apps let you customise their key bindings. For media and volume, use the dedicated Media actions instead of key presses; they work regardless of focus.</p>
+    </div></details>
+    <details><summary>macOS asks to let Macropad “control” another app</summary><div>
+      <p>That's the Automation permission, used by actions that talk directly to apps such as Music or Zoom. Click <strong>OK</strong> to allow it. You can review it later in <em>System Settings → Privacy &amp; Security → Automation</em>.</p>
+    </div></details>
+    <details><summary>How do I build a macro?</summary><div>
+      <p>Select a component, choose <strong>Action → Macro</strong>, then add steps: key presses, typed text, delays, media or window commands. Steps run top to bottom. Use the play button in the editor to test it while connected.</p>
+    </div></details>
+  </div>
+
+  <div class="faq-group">
+    <h3>Boards, sync &amp; Pro</h3>
+    <details><summary>My boards don't appear on my other iPhone or iPad</summary><div>
+      <p>Sync uses your iCloud account. On each device, make sure you're signed in to the same Apple Account, iCloud Drive is on, and sync is enabled in Macropad's settings. The first sync can take a few minutes on a slow connection.</p>
+    </div></details>
+    <details><summary>What's included for free, and what does Pro add?</summary><div>
+      <ul>
+        <li><strong>Free:</strong> up to 3 boards, every component type, and the Media, Windows and System packs.</li>
+        <li><strong>Pro:</strong> unlimited boards and Pro packs such as Xcode and Zoom.</li>
+      </ul>
+    </div></details>
+    <details><summary>I bought Pro but it isn't unlocked</summary><div>
+      <p>Go to <strong>Settings → Macropad Pro → Restore Purchases</strong>, making sure you're signed in with the same Apple Account you used to buy it. Purchases made with Family Sharing may take a moment to appear.</p>
+    </div></details>
+    <details><summary>How do I cancel or get a refund?</summary><div>
+      <p>Purchases are handled by Apple. To manage or cancel a subscription, open <em>Settings → [your name] → Subscriptions</em>. For refunds, use <a href="https://reportaproblem.apple.com" rel="noopener">reportaproblem.apple.com</a> — Apple doesn't allow developers to issue refunds directly.</p>
+    </div></details>
+    <details><summary>Can I back up or share a board?</summary><div>
+      <p>Yes. Open the board menu and choose <strong>Export</strong> to save it as a file you can keep or send to a friend. Import it from the same menu or by opening the file on iPhone.</p>
+    </div></details>
+  </div>
+
+  <h2><span class="n">04</span>Still stuck?</h2>
+  <div class="contact">
+    <div class="card screws">
+      <p><strong>Write to us at <a href="mailto:r3x.lab@gmail.com">r3x.lab@gmail.com</a></strong>. We usually reply within 1–2 business days.</p>
+      <p>Feature ideas are just as welcome as bug reports — many of Macropad's components started as a user's email.</p>
+    </div>
+    <div class="card">
+      <p><strong>To help us help you faster, include:</strong></p>
+      <ul>
+        <li>iPhone model and iOS version</li>
+        <li>Mac model and macOS version</li>
+        <li>App and Helper version (Settings → About)</li>
+        <li>What you expected vs. what happened</li>
+        <li>A screenshot or screen recording, if possible</li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<footer><div class="foot">
+  <span>© 2026 Rexiox. Macropad is not affiliated with Apple Inc.</span>
+  <span><a href="support.html">Support</a> · <a href="privacy-policy.html">Privacy</a> · <a href="terms-of-use.html">Terms</a></span>
+</div></footer>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rempad — Destek / Support</title>
+<meta name="description" content="Rempad destek ve sık sorulan sorular. Rempad support and FAQ.">
+<style>
+  :root {
+    --bg: #f2f2f7; --card: #ffffff; --text: #1c1c1e; --muted: #6e6e76;
+    --accent: #3a3a40; --line: #dcdce2; --soft: #f7f7fa;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000; --card: #141416; --text: #f2f2f5; --muted: #a1a1a8;
+      --accent: #e9e9ee; --line: #2c2c30; --soft: #1c1c1f;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: 780px; margin: 0 auto; padding: 32px 16px 64px; }
+  header { text-align: center; margin-bottom: 20px; }
+  header h1 { margin: 0; font-size: 2rem; letter-spacing: -.01em; }
+  header p { margin: 4px 0 0; color: var(--muted); }
+  nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 16px 0 28px; }
+  nav a {
+    color: var(--accent); text-decoration: none; border: 1px solid var(--line);
+    padding: 6px 16px; border-radius: 999px; background: var(--card); font-size: .95rem;
+  }
+  section {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 24px 22px; margin-bottom: 24px;
+  }
+  h2 { margin-top: 0; font-size: 1.45rem; }
+  h3 { font-size: 1.05rem; margin: 22px 0 6px; }
+  p, li { overflow-wrap: anywhere; }
+  ul, ol { padding-left: 22px; }
+  .box { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+  a { color: var(--accent); }
+  footer { text-align: center; color: var(--muted); font-size: .85rem; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Rempad</h1>
+    <p>Destek · Support</p>
+  </header>
+
+  <nav>
+    <a href="#tr" hreflang="tr">Türkçe</a>
+    <a href="#en" hreflang="en">English</a>
+  </nav>
+
+  <section id="tr" lang="tr">
+    <h2>Destek</h2>
+    <div class="box">
+      <p>Soru, hata bildirimi ve önerileriniz için:
+        <a href="mailto:contact.rexiox@gmail.com">contact.rexiox@gmail.com</a><br>
+        Lütfen telefon modelinizi, bilgisayarınızın işletim sistemini ve uygulama
+        sürümünü belirtin. Parola, PIN veya cihaz sırrı paylaşmayın.</p>
+    </div>
+
+    <h3>Nasıl başlarım?</h3>
+    <ol>
+      <li>Bilgisayarınıza <a href="index.html">Rempad Helper</a>’ı kurun ve açın
+        (macOS’ta Erişilebilirlik ve Ekran Kaydı izinlerini verin; Windows’ta güvenlik
+        duvarı isteminde özel ağlara izin verin).</li>
+      <li>Telefonunuz ve bilgisayarınız aynı Wi-Fi ağında olsun.</li>
+      <li>Helper’da “Yeni cihaz eşle”ye basın; telefonda bilgisayarı seçin, QR kodu
+        tarayın veya IP + port girin ve ekrandaki 6 haneli PIN’i yazın.</li>
+    </ol>
+
+    <h3>Bilgisayarım listede görünmüyor</h3>
+    <p>İki cihazın aynı ağda olduğunu, Helper’ın açık olduğunu ve telefonda yerel ağ
+      izninin verildiğini kontrol edin. Misafir ağları ve bazı kurumsal ağlar
+      cihazların birbirini görmesini engeller; bu durumda IP + port ile bağlanmayı
+      deneyin.</p>
+
+    <h3>Fare veya ekran çalışmıyor (macOS)</h3>
+    <p>Sistem Ayarları › Gizlilik ve Güvenlik altında Rempad Helper için
+      Erişilebilirlik ve Ekran Kaydı izinlerini açın, ardından Helper’ı yeniden
+      başlatın.</p>
+
+    <h3>Bazı pencereler kontrol edilemiyor (Windows)</h3>
+    <p>Yönetici olarak çalışan pencerelere, UAC istemlerine ve Ctrl+Alt+Del ekranına
+      Windows güvenliği gereği girdi gönderilemez.</p>
+
+    <h3>Telefonumu kaybettim</h3>
+    <p>Helper’da ilgili cihazı hemen kaldırın; o telefon bir daha bağlanamaz.</p>
+
+    <h3>Güvenlik</h3>
+    <p>Rempad’i yalnızca kendi bilgisayarınızda ve güvendiğiniz özel ağlarda kullanın.
+      Ayrıntılar: <a href="privacy-policy.html">Gizlilik Politikası</a> ·
+      <a href="terms-of-use.html">Kullanım Koşulları</a>.</p>
+  </section>
+
+  <section id="en" lang="en">
+    <h2>Support</h2>
+    <div class="box">
+      <p>For questions, bug reports and suggestions:
+        <a href="mailto:contact.rexiox@gmail.com">contact.rexiox@gmail.com</a><br>
+        Please include your phone model, your computer’s operating system and the app
+        version. Never share passwords, PINs or device secrets.</p>
+    </div>
+
+    <h3>How do I get started?</h3>
+    <ol>
+      <li>Install and open <a href="index.html">Rempad Helper</a> on your computer
+        (on macOS grant Accessibility and Screen Recording; on Windows allow private
+        networks in the firewall prompt).</li>
+      <li>Make sure your phone and computer are on the same Wi-Fi network.</li>
+      <li>Click “Pair new device” in the Helper; on the phone pick the computer, scan
+        the QR code or enter IP + port, then type the 6-digit PIN.</li>
+    </ol>
+
+    <h3>My computer doesn’t show up</h3>
+    <p>Check that both devices are on the same network, the Helper is running and the
+      phone has local network permission. Guest and some corporate networks block
+      devices from seeing each other; try connecting with IP + port.</p>
+
+    <h3>Pointer or screen doesn’t work (macOS)</h3>
+    <p>In System Settings › Privacy &amp; Security, turn on Accessibility and Screen
+      Recording for Rempad Helper, then restart the Helper.</p>
+
+    <h3>Some windows can’t be controlled (Windows)</h3>
+    <p>Windows security prevents input to windows running as administrator, UAC
+      prompts and the Ctrl+Alt+Del screen.</p>
+
+    <h3>I lost my phone</h3>
+    <p>Remove that device in the Helper right away; it can no longer connect.</p>
+
+    <h3>Security</h3>
+    <p>Use Rempad only on your own computer and on private networks you trust.
+      Details: <a href="privacy-policy.html">Privacy Policy</a> ·
+      <a href="terms-of-use.html">Terms of Use</a>.</p>
+  </section>
+
+  <footer>© 2026 Rexiox · <a href="mailto:contact.rexiox@gmail.com">contact.rexiox@gmail.com</a></footer>
+</main>
+<script>
+  try {
+    if (!location.hash && !/^tr\b/i.test(navigator.language || "")) location.replace("#en");
+  } catch (e) {}
+</script>
+</body>
+</html>

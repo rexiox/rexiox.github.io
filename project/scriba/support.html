@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support — Scriba</title>
+<meta name="description" content="Support — Scriba">
+<style>
+:root{
+  --bg:#ffffff; --bg2:#f5f5f7; --text:#1d1d1f; --muted:#6e6e73; --line:#d2d2d7; --link:#0066cc;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#000000; --bg2:#1d1d1f; --text:#f5f5f7; --muted:#a1a1a6; --line:#424245; --link:#2997ff}
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.47 var(--font);letter-spacing:-.022em;-webkit-font-smoothing:antialiased}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+p,li,td{color:var(--text)}
+strong{font-weight:600}
+/* nav */
+/* Solid dark bar with white text in both themes; :visited/:active stop links turning blue. */
+.nav{position:sticky;top:0;z-index:10;background:#1d1d1f;border-bottom:1px solid #000}
+.nav-in{max-width:980px;margin:0 auto;padding:0 22px;height:48px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav a,.nav a:link,.nav a:visited,.nav a:hover,.nav a:active,.nav a:focus{color:#fff;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.brand{font-weight:600;font-size:17px;letter-spacing:-.02em}
+.links{display:flex;gap:22px}
+.links a,.links a:visited{font-size:13px;opacity:.8}
+.links a:hover,.links a[aria-current]{opacity:1}
+.links a[aria-current]{font-weight:600}
+/* hero */
+.hero{max-width:980px;margin:0 auto;padding:56px 22px 8px}
+.eyebrow{display:none}
+h1{font-size:40px;line-height:1.1;font-weight:600;letter-spacing:-.003em;margin:0 0 12px}
+.lede{font-size:19px;color:var(--muted);max-width:720px;margin:0}
+.meta{margin-top:14px;font-size:14px;color:var(--muted)}
+/* layout */
+.wrap,main{max-width:980px;margin:0 auto;padding:16px 22px 72px}
+.toc{display:none}
+article{max-width:760px}
+section{scroll-margin-top:64px}
+h2{font-size:24px;line-height:1.17;font-weight:600;margin:44px 0 10px}
+h2 .n{display:none}
+h3{font-size:19px;font-weight:600;margin:24px 0 6px}
+ul,ol{padding-left:22px}
+li{margin:6px 0}
+.caps{font-size:15px}
+.note{color:var(--muted);font-size:15px}
+/* boxes */
+.card{background:var(--bg2);border-radius:18px;padding:24px 26px;margin-top:8px}
+.card h2{margin-top:0}
+.summary,.steps,.req{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:8px 0}
+.key{background:var(--bg);border-radius:14px;padding:18px}
+.steps .key,.req div{background:var(--bg2);border-radius:18px;padding:22px}
+.key b{display:block;font-size:17px;font-weight:600;margin-bottom:4px}
+.key span,.key p{color:var(--muted);font-size:15px;margin:0}
+.key .led{display:none}
+.key .num{display:block;font-size:12px;font-weight:600;color:var(--muted);letter-spacing:.02em}
+.key h3{margin:4px 0 6px}
+.req b{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+kbd,code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;background:var(--bg2);border:1px solid var(--line);border-radius:5px;padding:1px 6px}
+table{width:100%;border-collapse:collapse;font-size:15px;margin:12px 0;display:block;overflow-x:auto}
+th,td{text-align:left;padding:10px 12px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600}
+/* support */
+.cta{display:inline-block;margin-top:22px;background:#0071e3;color:#fff;font-size:17px;padding:11px 22px;border-radius:980px}
+.cta:hover{background:#0077ed;text-decoration:none}
+.faq-group{margin-top:28px}
+.faq-group h3{font-size:14px;color:var(--muted);font-weight:600;margin:0 0 4px}
+details{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;list-style:none;padding:16px 32px 16px 0;font-weight:600;position:relative}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:0;top:12px;font-size:24px;font-weight:300;color:var(--muted)}
+details[open] summary:after{content:"−"}
+details>div{padding:0 0 18px}
+details>div p:first-child{margin-top:0}
+.contact{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.card ul{margin:8px 0 0}
+/* footer */
+footer{background:var(--bg2);color:var(--muted);font-size:12px}
+.foot{max-width:980px;margin:0 auto;padding:18px 22px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between}
+.foot a{color:var(--muted)}
+@media (max-width:734px){h1{font-size:32px}.lede{font-size:17px}.links{gap:16px}}
+</style>
+</head>
+<body>
+<nav class="nav"><div class="nav-in"><a class="brand" href="index.html">Scriba</a><div class="links"><a href="support.html" aria-current="page">Support</a><a href="privacy-policy.html">Privacy</a><a href="terms-of-use.html">Terms</a></div></div></nav>
+<header class="hero"><h1>Scriba Support</h1><p class="lede">Answers to common questions, and how to reach us.</p><div class="meta">Last updated: October 29, 2026 · Applies to Scriba for Android and iOS</div></header>
+<div class="wrap"><article>
+<section id="start"><h2><span class="n">01</span>Getting started</h2>
+<ul>
+<li><strong>Create:</strong> tap the + button to add a note or a folder.</li>
+<li><strong>Organize:</strong> open a folder to add notes inside it; use the back arrow to go up.</li>
+<li><strong>Search:</strong> tap the search icon to find notes by name.</li>
+<li><strong>Personalize:</strong> open the menu (top left) to pick a theme, change the language or turn on the passcode lock.</li>
+<li><strong>Read aloud:</strong> open a note's preview and tap the speaker button next to the close button. Choose a speed and voice, then tap <em>Start reading</em>. The sentence being read stays bright while the rest fades, so you can follow along.</li>
+<li><strong>Dictate (Pro):</strong> while writing, tap the microphone in the toolbar above the keyboard and speak. Tap it again to stop.</li>
+<li><strong>Insert more:</strong> type <em>/</em> in a note to add tables, drawings, voice notes, math, code, links to other notes or a template.</li>
+<li><strong>Import &amp; export:</strong> import .txt, .md, .docx or .scriba files from the home screen; export a note as text, Markdown, web page, PDF, Word or Scriba file from the note's menu.</li>
+<li><strong>Version history:</strong> Scriba keeps earlier versions of each note so you can look back or restore one from the note's menu.</li></ul>
+</section>
+<section id="faq"><h2><span class="n">02</span>Frequently asked</h2>
+<h3>Where are my notes stored?</h3><p>Only on your device. Scriba has no account and no cloud sync.</p>
+<h3>Does Scriba collect any data?</h3><p>Never your writing. On Android, Scriba sends anonymous usage statistics and crash reports through Google Firebase so we can fix bugs; these never include your notes. Details are in the <a href="privacy-policy.html">Privacy Policy</a>.</p>
+<h3>How do I move my notes to a new phone?</h3><p>Either use your device backup (Android backup to your Google account, or iCloud / computer backup on iPhone), or save a backup file from Settings with <em>Back Up Data</em> and open it on the new phone with <em>Restore from Backup</em>. Restoring replaces the notes currently in the app and applies the backup's settings. An encrypted backup asks for its password. Your passcode is not included on Android; set it again after restoring.</p>
+<h3>Is the backup file protected?</h3><p>Only if you turn on <em>Encrypt Backups</em> in Settings. Then backup files can't be opened without your password; this phone opens its own backups without asking, another phone needs the password. If you forget it, encrypted backups can't be recovered. Without encryption, anyone who has the file can read your notes, including locked ones.</p>
+<h3>How does Auto Backup work? (Pro)</h3><p>Turn on <em>Auto Backup to Folder</em> in Settings and pick a folder. Scriba saves a backup there daily, weekly or monthly while you use the app, and keeps the newest 7 files. Pick a cloud folder such as Google Drive or iCloud Drive so your backups survive a phone reset.</p>
+<h3>I forgot my passcode.</h3><p>For your privacy, we cannot see or reset it. Contact us and we'll help with the options available.</p>
+<h3>How do I delete everything?</h3><p>Delete notes and folders inside the app, or uninstall Scriba to remove all of its data from the device.</p>
+<h3>What is free and what is Scriba Pro?</h3><p>Writing, folders, images, drawings, voice notes, search, import, export to text, Markdown, web page and Scriba file, backups (including encryption), read aloud, spell check, writing goals, reminders and the widget, and the last 7 days of version history are free. Scriba Pro is an optional subscription that adds extra themes and fonts, dictation, the live text analyzer, password locks for notes and folders, page background images, extra templates, PDF and Word export (one free export of each is included), Auto Backup to a folder and version history older than 7 days.</p>
+<h3>How do I cancel or restore Scriba Pro?</h3><p>Subscriptions are handled by Google Play or the App Store. Cancel any time in your store account (Google Play: <em>Payments &amp; subscriptions → Subscriptions</em>; iPhone: <em>Settings → your name → Subscriptions</em>). On a new phone, sign in with the same store account, open the Pro screen and tap <em>Restore purchases</em>. Refunds follow Google's or Apple's refund policy.</p>
+<h3>Why does Scriba ask for the microphone?</h3><p>Dictation and voice notes need the microphone (dictation on iPhone and iPad also needs Speech Recognition). Scriba asks only when you first use one of them, explains why first, and works fine if you say no. With dictation your voice isn't recorded or stored; only the text is added to your note. Voice notes are saved inside the note on your device and never sent to us.</p>
+<h3>I turned the microphone off. How do I turn it back on?</h3><p>Tap the microphone again and choose <em>Open Settings</em>, or open your device settings → Apps → Scriba → Permissions (Android) or Settings → Scriba (iPhone) and allow Microphone and Speech Recognition.</p>
+<h3>Read aloud has no voice in my language.</h3><p>Read aloud uses the voices installed on your device. On Android, install more voices under Settings → Text-to-speech output → Install voice data. On iPhone, go to Settings → Accessibility → Spoken Content → Voices.</p>
+</section>
+<section id="contact"><h2><span class="n">03</span>Still stuck?</h2>
+<p>Email us at <a href="mailto:contact.rexiox@gmail.com?subject=Scriba%20Support">contact.rexiox@gmail.com</a>. Please include your device model, OS version and the app version (shown at the bottom of the menu).</p>
+</section>
+
+</article></div>
+<footer class="wrap note">© 2026 Rexiox · <a href="mailto:contact.rexiox@gmail.com">contact.rexiox@gmail.com</a></footer>
+</body>
+</html>
