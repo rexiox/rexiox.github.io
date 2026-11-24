@@ -85,7 +85,7 @@
   .btn.secondary:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); }
 
   /* App Screenshots & Video Gallery */
-  .gallery-section { margin: 40px 0 64px; }
+  .gallery-section { margin: 40px 0 64px; scroll-margin-top: 64px; }
   .gallery-head {
     display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
     margin-bottom: 24px;
@@ -178,25 +178,23 @@
   /* Lightbox Modal */
   .lightbox {
     position: fixed; inset: 0; z-index: 100;
-    background: rgba(0,0,0,.86);
+    background: rgba(0,0,0,.88);
     backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     display: flex; align-items: center; justify-content: center; padding: 24px;
     opacity: 0; pointer-events: none; transition: opacity .2s ease;
   }
   .lightbox.open { opacity: 1; pointer-events: auto; }
   .lightbox-inner {
-    position: relative; max-width: 92vw; max-height: 90vh;
+    position: relative; max-width: 92vw; max-height: 86vh;
     display: flex; align-items: center; justify-content: center;
   }
   .lightbox img,
   .lightbox video {
-    max-width: min(420px, 84vw); max-height: 84vh; border-radius: 32px;
+    width: auto; height: auto;
+    max-width: min(440px, 86vw); max-height: 84vh;
+    border-radius: 32px; object-fit: contain;
     box-shadow: 0 24px 80px rgba(0,0,0,.7); border: 2px solid rgba(255,255,255,.15);
     display: block; background: #000;
-  }
-  .lightbox video {
-    max-width: min(860px, 88vw);
-    border-radius: 22px;
   }
   .lightbox [hidden] { display: none !important; }
 
@@ -274,6 +272,8 @@
     .phone-screen { border-radius: 25px; }
     .lb-prev { left: 10px; }
     .lb-next { right: 10px; }
+    .lightbox img,
+    .lightbox video { max-width: 90vw; max-height: 78vh; border-radius: 24px; }
   }
 
   @media (max-width: 480px) {
@@ -333,7 +333,7 @@
   </section>
 
   <!-- Tanıtım Videosu ve Mobil Uygulama Ekran Görüntüleri -->
-  <section class="gallery-section">
+  <section class="gallery-section" id="gallery">
     <div class="gallery-head">
       <div>
         <h2 class="section-title">
@@ -357,8 +357,8 @@
 
     <div class="gallery-track" id="gallery-track">
       <!-- Tanıtım Videosu (Akışın Başı) -->
-      <div class="phone-item">
-        <div class="phone-mockup" data-index="0" data-type="video" data-src="https://github.com/rexiox/rexiox.github.io/raw/refs/heads/main/project/rempad/promotion.mov" role="button" tabindex="0" aria-label="Play promotion video">
+      <div class="phone-item" id="promo-video">
+        <div class="phone-mockup" id="promo-video-card" data-index="0" data-type="video" data-src="https://github.com/rexiox/rexiox.github.io/raw/refs/heads/main/project/rempad/promotion.mov" role="button" tabindex="0" aria-label="Play promotion video">
           <div class="phone-screen">
             <video src="https://github.com/rexiox/rexiox.github.io/raw/refs/heads/main/project/rempad/promotion.mov#t=0.5" muted playsinline preload="metadata"></video>
             <div class="video-overlay">
@@ -538,7 +538,7 @@
 </main>
 
 <!-- Tam Ekran Önizleme (Lightbox) -->
-<div class="lightbox" id="lightbox" aria-hidden="true">
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
   <button type="button" class="lb-btn lb-close" id="lb-close" aria-label="Close">
     <svg width="20" height="20"><use href="#i-close"/></svg>
   </button>
@@ -547,7 +547,7 @@
   </button>
   <div class="lightbox-inner">
     <img id="lb-img" src="" alt="" hidden>
-    <video id="lb-video" controls playsinline hidden></video>
+    <video id="lb-video" controls playsinline preload="metadata" hidden></video>
   </div>
   <button type="button" class="lb-btn lb-next" id="lb-next" aria-label="Next">
     <svg width="20" height="20"><use href="#i-chev-right"/></svg>
@@ -559,6 +559,7 @@
   <div class="footer-inner">
     <span>© 2026 Rexiox</span>
     <nav class="footer-links">
+      <a href="#promo-video"><span lang="tr">Tanıtım Videosu</span><span lang="en">Promo Video</span></a>
       <a href="privacy-policy.html"><span lang="tr">Gizlilik Politikası</span><span lang="en">Privacy Policy</span></a>
       <a href="terms-of-use.html"><span lang="tr">Kullanım Koşulları</span><span lang="en">Terms of Use</span></a>
       <a href="support.html"><span lang="tr">Destek</span><span lang="en">Support</span></a>
@@ -623,14 +624,16 @@
   var mediaItems = mockups.map(function (m) {
     var type = m.getAttribute("data-type") || "image";
     var src = type === "video" ? m.getAttribute("data-src") : m.querySelector("img").getAttribute("src");
-    return { type: type, src: src };
+    return { type: type, src: src, el: m };
   });
 
   var lightbox = document.getElementById("lightbox");
   var lbImg = document.getElementById("lb-img");
   var lbVideo = document.getElementById("lb-video");
   var lbCounter = document.getElementById("lb-counter");
+  var lbClose = document.getElementById("lb-close");
   var currentIdx = 0;
+  var openerEl = null;
 
   document.getElementById("gal-prev").addEventListener("click", function () {
     track.scrollBy({ left: -280, behavior: "smooth" });
@@ -645,26 +648,31 @@
     lbVideo.load();
   }
 
-  function showLightbox(idx) {
+  function showLightbox(idx, triggerEl) {
+    openerEl = triggerEl || document.activeElement;
     currentIdx = (idx + mediaItems.length) % mediaItems.length;
     var item = mediaItems[currentIdx];
 
     if (item.type === "video") {
       lbImg.hidden = true;
+      lbImg.removeAttribute("src");
       lbVideo.hidden = false;
       lbVideo.src = item.src;
+      lbVideo.currentTime = 0;
       lbVideo.play().catch(function () {});
     } else {
       stopVideo();
       lbVideo.hidden = true;
       lbImg.hidden = false;
       lbImg.src = item.src;
+      lbImg.alt = item.el.querySelector("img") ? item.el.querySelector("img").alt : "";
     }
 
     lbCounter.textContent = (currentIdx + 1) + " / " + mediaItems.length;
     lightbox.classList.add("open");
     lightbox.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    lbClose.focus();
   }
 
   function closeLightbox() {
@@ -672,32 +680,54 @@
     lightbox.classList.remove("open");
     lightbox.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    if (openerEl && typeof openerEl.focus === "function") {
+      openerEl.focus();
+      openerEl = null;
+    }
   }
 
   mockups.forEach(function (m, idx) {
-    m.addEventListener("click", function () { showLightbox(idx); });
+    m.addEventListener("click", function () { showLightbox(idx, m); });
     m.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showLightbox(idx); }
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); showLightbox(idx, m); }
     });
   });
 
-  document.getElementById("lb-close").addEventListener("click", closeLightbox);
-  document.getElementById("lb-prev").addEventListener("click", function () { showLightbox(currentIdx - 1); });
-  document.getElementById("lb-next").addEventListener("click", function () { showLightbox(currentIdx + 1); });
+  lbClose.addEventListener("click", closeLightbox);
+  document.getElementById("lb-prev").addEventListener("click", function () { showLightbox(currentIdx - 1, openerEl); });
+  document.getElementById("lb-next").addEventListener("click", function () { showLightbox(currentIdx + 1, openerEl); });
   lightbox.addEventListener("click", function (e) {
-    if (e.target === lightbox) closeLightbox();
+    if (e.target === lightbox || e.target === lightbox.querySelector(".lightbox-inner")) closeLightbox();
   });
   document.addEventListener("keydown", function (e) {
     if (!lightbox.classList.contains("open")) return;
     if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft") showLightbox(currentIdx - 1);
-    if (e.key === "ArrowRight") showLightbox(currentIdx + 1);
+    if (e.key === "ArrowLeft") showLightbox(currentIdx - 1, openerEl);
+    if (e.key === "ArrowRight") showLightbox(currentIdx + 1, openerEl);
   });
+
+  // `#promo-video` veya `#video` hash linki ile tanıtım videosunu doğrudan aç
+  function handleVideoHash() {
+    var h = (window.location.hash || "").toLowerCase();
+    if (h === "#promo-video" || h === "#video") {
+      var promoItem = document.getElementById("promo-video");
+      var promoCard = document.getElementById("promo-video-card");
+      if (promoItem) {
+        promoItem.scrollIntoView({ behavior: "smooth", block: "center", inline: "start" });
+      }
+      setTimeout(function () {
+        showLightbox(0, promoCard);
+      }, 220);
+    }
+  }
+
+  window.addEventListener("hashchange", handleVideoHash);
 
   var saved = null;
   try { saved = localStorage.getItem("rempad-lang"); } catch (e) {}
   applyPick();
   setLang(saved || (/^tr\b/i.test(navigator.language || "") ? "tr" : "en"));
+  handleVideoHash();
 })();
 </script>
 </body>
